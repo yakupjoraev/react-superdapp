@@ -2,7 +2,7 @@ function StepOne() {
   return (
     <div className="wrapper">
       <div className="start-screen">
-        <img className="start-screen__img" src="/img/logo.svg" alt="logo" />
+        <img className="start-screen__img" src="./img/logo.svg" alt="logo" />
 
         <h1 className="title">
           WELCOME<br />

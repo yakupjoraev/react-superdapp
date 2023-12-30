@@ -11,7 +11,7 @@ function StepEleven() {
 
           <div className="info-pay__currency">
             <div className="info-pay__currency-pic">
-              <img src="/img/ethereum.svg" width="35" height="57" alt="ethereum" />
+              <img src="./img/ethereum.svg" width="35" height="57" alt="ethereum" />
             </div>
 
             <p className="info-pay__currency-text yellow">+0.01421 ETH</p>

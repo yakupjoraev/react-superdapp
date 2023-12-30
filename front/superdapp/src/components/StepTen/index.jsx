@@ -18,7 +18,7 @@ function StepTen() {
             <div className="active__block">
               <div className="active__info">
                 <div className="active__pic yellow-bg">
-                  <img className="active__pic-icon" width="14" height="16" src="/img/icons/active-arrow-down.svg" alt="arrow icon" />
+                  <img className="active__pic-icon" width="14" height="16" src="./img/icons/active-arrow-down.svg" alt="arrow icon" />
                 </div>
 
                 <div className="active__texts">
@@ -36,7 +36,7 @@ function StepTen() {
             <div className="active__block">
               <div className="active__info">
                 <div className="active__pic black-bg">
-                  <img className="active__pic-icon" width="14" height="16" src="/img/icons/active-arrow-up.svg" alt="arrow icon" />
+                  <img className="active__pic-icon" width="14" height="16" src="./img/icons/active-arrow-up.svg" alt="arrow icon" />
                 </div>
 
                 <div className="active__texts">
@@ -60,7 +60,7 @@ function StepTen() {
             <div className="active__block">
               <div className="active__info">
                 <div className="active__pic yellow-bg">
-                  <img className="active__pic-icon" width="14" height="16" src="/img/icons/active-arrow-down.svg" alt="arrow icon" />
+                  <img className="active__pic-icon" width="14" height="16" src="./img/icons/active-arrow-down.svg" alt="arrow icon" />
                 </div>
 
                 <div className="active__texts">
@@ -78,7 +78,7 @@ function StepTen() {
             <div className="active__block">
               <div className="active__info">
                 <div className="active__pic black-bg">
-                  <img className="active__pic-icon" width="14" height="16" src="/img/icons/active-arrow-up.svg" alt="arrow icon" />
+                  <img className="active__pic-icon" width="14" height="16" src="./img/icons/active-arrow-up.svg" alt="arrow icon" />
                 </div>
 
                 <div className="active__texts">
@@ -102,7 +102,7 @@ function StepTen() {
             <div className="active__block">
               <div className="active__info">
                 <div className="active__pic yellow-bg">
-                  <img className="active__pic-icon" width="14" height="16" src="/img/icons/active-arrow-down.svg" alt="arrow icon" />
+                  <img className="active__pic-icon" width="14" height="16" src="./img/icons/active-arrow-down.svg" alt="arrow icon" />
                 </div>
 
                 <div className="active__texts">
@@ -120,7 +120,7 @@ function StepTen() {
             <div className="active__block">
               <div className="active__info">
                 <div className="active__pic black-bg">
-                  <img className="active__pic-icon" width="14" height="16" src="/img/icons/active-arrow-up.svg" alt="arrow icon" />
+                  <img className="active__pic-icon" width="14" height="16" src="./img/icons/active-arrow-up.svg" alt="arrow icon" />
                 </div>
 
                 <div className="active__texts">
@@ -144,7 +144,7 @@ function StepTen() {
             <div className="active__block">
               <div className="active__info">
                 <div className="active__pic yellow-bg">
-                  <img className="active__pic-icon" width="14" height="16" src="/img/icons/active-arrow-down.svg" alt="arrow icon" />
+                  <img className="active__pic-icon" width="14" height="16" src="./img/icons/active-arrow-down.svg" alt="arrow icon" />
                 </div>
 
                 <div className="active__texts">
@@ -162,7 +162,7 @@ function StepTen() {
             <div className="active__block">
               <div className="active__info">
                 <div className="active__pic black-bg">
-                  <img className="active__pic-icon" width="14" height="16" src="/img/icons/active-arrow-up.svg" alt="arrow icon" />
+                  <img className="active__pic-icon" width="14" height="16" src="./img/icons/active-arrow-up.svg" alt="arrow icon" />
                 </div>
 
                 <div className="active__texts">

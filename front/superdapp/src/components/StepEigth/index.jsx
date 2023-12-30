@@ -15,7 +15,7 @@ function StepEigth() {
               <div className="form__group">
                 <div className="form__input-wrapper form__input-wrapper--right">
                   <button type="button" className="form__icon form__input-copy">
-                    <img  src="/img/icons/search.svg" alt="search icon" />
+                    <img  src="./img/icons/search.svg" alt="search icon" />
                   </button>
                   <input className="form__input" id="" type="search" placeholder="Search Token"  />
                 </div>
@@ -27,14 +27,14 @@ function StepEigth() {
             <div className="wallet__tokens-header">
               <p className="wallet__tokens-label">Tokens</p>
               <button type="button" className="wallet__tokens-sort">
-                <img src="/img/icons/sort-solid.svg" alt="sort-solid" />
+                <img src="./img/icons/sort-solid.svg" alt="sort-solid" />
               </button>
             </div>
 
             <div className="wallet__token">
               <div className="wallet__token-infos">
                 <div className="wallet__token-pic">
-                  <img src="/img/ethereum.svg" width="14" height="23" alt="ethereum" />
+                  <img src="./img/ethereum.svg" width="14" height="23" alt="ethereum" />
                 </div>
 
                 <div className="wallet__token-info">
@@ -47,7 +47,7 @@ function StepEigth() {
                     <div className="wallet__token-percent yellow">
                       +4.73%
 
-                      <img className="wallet__token-arrow" src="/img/icons/percent-up.svg" alt="percent-up" />
+                      <img className="wallet__token-arrow" src="./img/icons/percent-up.svg" alt="percent-up" />
                     </div>
                   </div> */}
                 </div>
@@ -62,7 +62,7 @@ function StepEigth() {
             <div className="wallet__token">
               <div className="wallet__token-infos">
                 <div className="wallet__token-pic">
-                  <img src="/img/bitcoin.svg" width="36" height="36" alt="Bitcoin" />
+                  <img src="./img/bitcoin.svg" width="36" height="36" alt="Bitcoin" />
                 </div>
 
                 <div className="wallet__token-info">
@@ -75,7 +75,7 @@ function StepEigth() {
                     <div className="wallet__token-percent red">
                       -1.22%
 
-                      <img className="wallet__token-arrow" src="/img/icons/percent-down.svg" alt="percent-down" />
+                      <img className="wallet__token-arrow" src="./img/icons/percent-down.svg" alt="percent-down" />
                     </div>
                   </div> */}
                 </div>

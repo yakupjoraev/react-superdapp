@@ -7,7 +7,7 @@ function StepFour() {
 
             <div className="create-password__step active">
               <div className="create-password__step-num">
-                <img src="/img/icons/check.svg" alt="check icon" />
+                <img src="./img/icons/check.svg" alt="check icon" />
               </div>
               <p className="create-password__step-text">Create <br/> Password</p>
             </div>
@@ -16,7 +16,7 @@ function StepFour() {
 
             <div className="create-password__step active">
               <div className="create-password__step-num">
-               <img src="/img/icons/check.svg" alt="check icon" />
+               <img src="./img/icons/check.svg" alt="check icon" />
               </div>
               <p className="create-password__step-text">Secure <br/> Wallet</p>
             </div>
@@ -25,7 +25,7 @@ function StepFour() {
 
             <div className="create-password__step active">
               <div className="create-password__step-num">
-                <img src="/img/icons/check.svg" alt="check icon" />
+                <img src="./img/icons/check.svg" alt="check icon" />
               </div>
               <p className="create-password__step-text">Confirm <br/> Protection</p>
             </div>
@@ -34,7 +34,7 @@ function StepFour() {
           </div>
 
           <div className="content">
-            <img className="create-password__pic" src="/img/create-password-done.png" width="182" height="182" alt="create-password done pic" />
+            <img className="create-password__pic" src="./img/create-password-done.png" width="182" height="182" alt="create-password done pic" />
             <h1 className="title title--middle">
              CONGRATULATION
             </h1>

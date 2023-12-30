@@ -28,19 +28,19 @@ function StepFive() {
 
           <div className="wallet__invoice-actions">
             <a className="wallet__invoice-action active" href="#">
-              <img src="/img/icons/wallet-arrow-up.svg" alt="wallet-arrow-up" />
+              <img src="./img/icons/wallet-arrow-up.svg" alt="wallet-arrow-up" />
 
               <span>Send</span>
             </a>
 
             <a className="wallet__invoice-action" href="#">
-              <img src="/img/icons/wallet-arrow-down.svg" alt="wallet-arrow-down" />
+              <img src="./img/icons/wallet-arrow-down.svg" alt="wallet-arrow-down" />
 
               <span>Recive</span>
             </a>
 
             <a className="wallet__invoice-action" href="#">
-              <img src="/img/icons/wallet-arrow-coins.svg" alt="wallet-arrow-coins" />
+              <img src="./img/icons/wallet-arrow-coins.svg" alt="wallet-arrow-coins" />
 
               <span>Earn</span>
             </a>
@@ -51,14 +51,14 @@ function StepFive() {
           <div className="wallet__tokens-header">
             <p className="wallet__tokens-label">Tokens</p>
             <button type="button" className="wallet__tokens-sort">
-              <img src="/img/icons/sort-solid.svg" alt="sort-solid" />
+              <img src="./img/icons/sort-solid.svg" alt="sort-solid" />
             </button>
           </div>
 
           <div className="wallet__token">
             <div className="wallet__token-infos">
               <div className="wallet__token-pic">
-                <img src="/img/ethereum.svg" width="14" height="23" alt="ethereum" />
+                <img src="./img/ethereum.svg" width="14" height="23" alt="ethereum" />
               </div>
 
               <div className="wallet__token-info">
@@ -71,7 +71,7 @@ function StepFive() {
                   <div className="wallet__token-percent yellow">
                     +4.73%
 
-                    <img className="wallet__token-arrow" src="/img/icons/percent-up.svg" alt="percent-up" />
+                    <img className="wallet__token-arrow" src="./img/icons/percent-up.svg" alt="percent-up" />
                   </div>
                 </div>
               </div>
@@ -86,7 +86,7 @@ function StepFive() {
           <div className="wallet__token">
             <div className="wallet__token-infos">
               <div className="wallet__token-pic">
-                <img src="/img/bitcoin.svg" width="36" height="36" alt="Bitcoin" />
+                <img src="./img/bitcoin.svg" width="36" height="36" alt="Bitcoin" />
               </div>
 
               <div className="wallet__token-info">
@@ -99,7 +99,7 @@ function StepFive() {
                   <div className="wallet__token-percent red">
                     -1.22%
 
-                    <img className="wallet__token-arrow" src="/img/icons/percent-down.svg" alt="percent-down" />
+                    <img className="wallet__token-arrow" src="./img/icons/percent-down.svg" alt="percent-down" />
                   </div>
                 </div>
               </div>

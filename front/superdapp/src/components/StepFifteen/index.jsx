@@ -12,7 +12,7 @@ function StepFifteen() {
         </h1>
 
         <div className="staking-process__result">
-          <img className="staking-process__pic" src="/img/error-pic.png" width="140" height="140" alt="wrrow pic" />
+          <img className="staking-process__pic" src="./img/error-pic.png" width="140" height="140" alt="wrrow pic" />
 
           <h2 className="title title--middle">ERROR</h2>
           <p className="text">Please contact support</p>

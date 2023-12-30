@@ -38,7 +38,7 @@ return (
           <label className="form__label" htmlFor="input1">New password (minimum 8 characters)</label>
 
           <div className="form__input-wrapper">
-            <img className="form__icon" src="/img/icons/lock.svg" alt="lock icon" />
+            <img className="form__icon" src="./img/icons/lock.svg" alt="lock icon" />
             <input className="form__input" id="input1" type="password" placeholder="Password" />
           </div>
         </div>
@@ -47,7 +47,7 @@ return (
           <label className="form__label" htmlFor="input2">Confirm password</label>
 
           <div className="form__input-wrapper">
-            <img className="form__icon" src="/img/icons/lock.svg" alt="lock icon" />
+            <img className="form__icon" src="./img/icons/lock.svg" alt="lock icon" />
             <input className="form__input" id="input2" type="password" placeholder="Repeat Password" />
           </div>
         </div>
