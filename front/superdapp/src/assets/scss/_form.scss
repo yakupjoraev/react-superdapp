@@ -29,6 +29,7 @@
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
+  background-color: transparent;
 }
 
 .form__input {
@@ -117,4 +118,89 @@
 .form__copy-pic {
   width: 20px;
   height: 20px;
+}
+
+.form__block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 12px;
+  padding: 10px 16px;
+}
+
+.form__pic {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  background-color: var(--white-color);
+}
+
+.form__infos {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+
+.form__info {
+  margin: 0;
+  text-align: left;
+}
+
+.form__right {
+  margin-left: auto;
+}
+
+.form__right-btn {
+  background-color: transparent;
+  outline: 0;
+}
+
+.form__transaction {
+  font-size: 11px;
+  line-height: 120%;
+  color: var(--primary-color);
+}
+
+.form__input-wrapper--right {
+
+  .form__input {
+    padding: 18px 50px 18px 18px;
+  }
+
+  .form__icon {
+    left: auto;
+    right: 20px;
+  }
+}
+
+.form__income {
+  padding: 10px 20px;
+  border-radius: 16px;
+  background-color: #161616;
+  color: var(--white-color);
+}
+
+.form__income-label {
+  margin-bottom: 10px;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.form__income-row {
+  display: flex;
+  align-items: flex-end;
+}
+
+.form__income-text {
+  margin: 0;
+}
+
+.form__income-dots {
+  flex: 1 1 auto;
+  margin-bottom: 4px;
+  border-bottom: 1px dotted var(--white-color);
 }

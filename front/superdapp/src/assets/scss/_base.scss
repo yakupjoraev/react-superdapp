@@ -1,5 +1,6 @@
 .wrapper {
   width: 100vw;
+  min-height: 100vh;
   height: 100%;
   padding: 20px;
   background-color: var(--black-color);
@@ -42,6 +43,13 @@
   line-height: 140%;
 }
 
+.text--grey {
+  color: #848484;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 140%;
+}
+
 .text--yellow {
   margin-bottom: 20px;
   font-family: var(--primary-font);
@@ -75,4 +83,12 @@
 
 .yellow {
   color: var(--primary-color);
+}
+
+.yellow-bg {
+  background-color: var(--primary-color);
+}
+
+.black-bg {
+  background-color: var(--black-color);
 }
