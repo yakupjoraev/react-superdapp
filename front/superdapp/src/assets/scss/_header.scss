@@ -1,0 +1,37 @@
+.header {
+  margin-bottom: 30px;
+}
+
+.header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__settings {}
+
+.header__settings-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.header__select {}
+
+.header__selected {
+  display: flex;
+  align-items: center;
+  column-gap: 4px;
+
+  font-family: var(--secondary-font);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 200%;
+  color: var(--white-color);
+}
+
+.header__chat {}
+
+.header__chat-icon {
+  width: 24px;
+  height: 24px;
+}

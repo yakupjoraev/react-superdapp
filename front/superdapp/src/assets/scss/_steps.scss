@@ -1,0 +1,66 @@
+.create-password__steps {
+  display: flex;
+  align-items: center;
+  margin-bottom: 48px;
+}
+
+.create-password__step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 6px;
+  width: 28px;
+
+  &.active {
+    .create-password__step-num {
+      background-color: var(--primary-color);
+      color: var(--black-color);
+    }
+
+    .create-password__step-text {
+      color: var(--primary-color);
+    }
+  }
+}
+
+.create-password__step-line {
+  align-self: flex-start;
+  margin-top: 11px;
+  height: 4px;
+  width: 100%;
+  background-color: var(--white-color);
+  border-radius: 2px;
+
+  &.active {
+    background-color: var(--primary-color);
+  }
+}
+
+.create-password__step-line--second {
+  min-width: 80px;
+}
+
+.create-password__step-num {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  min-width: 28px;
+  height: 28px;
+  border-radius: 100%;
+  background-color: var(--white-color);
+  font-family: var(--secondary-font);
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--grey-color);
+}
+
+.create-password__step-text {
+  text-align: center;
+  font-size: 11px;
+  line-height: 110%;
+  letter-spacing: 1.1px;
+  color: var(--white-color);
+}

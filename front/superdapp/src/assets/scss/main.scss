@@ -1,0 +1,29 @@
+// Global SCSS-files imports
+@import "./fonts";
+@import "./vars";
+// @import "./normalize";
+@import "./reset";
+@import "./global";
+@import "./base";
+
+// Sections or Pages SCSS-files imports
+@import "./header";
+@import "./styles";
+@import "./steps";
+@import "./form";
+// @import "./footer";
+
+
+// Libs
+
+// временно
+.steps-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 40px;
+  background-color: #fff;
+}
+
+.steps-item {}
