@@ -7,7 +7,7 @@ function StepThree() {
 
             <div className="create-password__step active">
               <div className="create-password__step-num">
-                <img src="/img/icons/check.svg" alt="check icon" />
+                <img src="./img/icons/check.svg" alt="check icon" />
               </div>
               <p className="create-password__step-text">Create <br/> Password</p>
             </div>
@@ -62,7 +62,7 @@ function StepThree() {
 
             <button type="button" className="form__copy">
               <p className="form__copy-text" >Copy full phrase</p>
-              <img className="form__copy-pic" src="/img/icons/copy.svg" alt="copy icon" />
+              <img className="form__copy-pic" src="./img/icons/copy.svg" alt="copy icon" />
             </button>
 
             <button type="submit" className="form__btn btn">CONFIRM</button>

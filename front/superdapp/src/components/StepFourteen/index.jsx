@@ -12,7 +12,7 @@ function StepFourteen() {
       </h1>
 
       <div className="staking-process__result">
-        <img className="staking-process__pic" src="/img/complete-pic.png" width="140" height="140" alt="complete pic" />
+        <img className="staking-process__pic" src="./img/complete-pic.png" width="140" height="140" alt="complete pic" />
 
         <h2 className="title title--middle">COMPLETE</h2>
         <p className="text">Staking completed successfully</p>
