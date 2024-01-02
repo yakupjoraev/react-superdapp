@@ -17,7 +17,7 @@ function StepEigth() {
                   <button type="button" className="form__icon form__input-copy">
                     <img  src="./img/icons/search.svg" alt="search icon" />
                   </button>
-                  <input className="form__input" id="" type="search" placeholder="Search Token"  />
+                  <input className="form__input" type="search" placeholder="Search Token"  />
                 </div>
               </div>
             </div>
@@ -90,7 +90,7 @@ function StepEigth() {
         </div>
       </div>
 
-      <Footer/>
+      <Footer showWallet={true} showActivity={true} showDashboard={true} />
     </div>
   )
 }

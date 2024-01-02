@@ -60,6 +60,10 @@
   color: var(--primary-color);
 }
 
+.text--uppercase {
+  text-transform: uppercase;
+}
+
 .btn {
   display: flex;
   align-items: center;

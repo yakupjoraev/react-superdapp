@@ -10,7 +10,7 @@ function StepOne() {
         </h1>
 
         <p className="text">
-          XWallet Browser Extension it's a secure wallet that allows you to store, withdraw and deposit cryptocurrencies from your browser.
+          <span className="text--uppercase">XWallet</span> Browser Extension it's a secure wallet that allows you to store, withdraw and deposit cryptocurrencies from your browser.
         </p>
 
         <a className="btn" href="#">START</a>

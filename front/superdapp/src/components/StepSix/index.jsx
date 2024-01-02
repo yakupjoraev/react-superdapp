@@ -18,7 +18,7 @@ function StepSix() {
 
                 <div className="form__input-wrapper">
                   <img className="form__icon" src="./img/icons/link-outline.svg" alt="link-outline icon" />
-                  <input className="form__input" id="" type="email" placeholder="Enter address" />
+                  <input className="form__input" type="email" placeholder="Enter address" />
                 </div>
               </div>
 

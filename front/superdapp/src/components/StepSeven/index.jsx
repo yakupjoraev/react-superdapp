@@ -22,7 +22,7 @@ function StepSeven() {
                   <button type="button" className="form__icon form__input-copy">
                     <img  src="./img/icons/copy.svg" alt="copy icon" />
                   </button>
-                  <input className="form__input" id="" type="text" placeholder="" value="UQB04pmTn...PiUyg6jk9RQQuDfA6YGP" />
+                  <input className="form__input" type="text" value="UQB04pmTn...PiUyg6jk9RQQuDfA6YGP" />
                 </div>
               </div>
 

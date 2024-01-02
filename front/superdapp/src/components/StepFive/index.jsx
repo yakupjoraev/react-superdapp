@@ -113,7 +113,7 @@ function StepFive() {
         </div>
       </div>
 
-      <Footer/>
+      <Footer showWallet={true} showActivity={true} showDashboard={false} activeItem="wallet" />
     </div>
   )
 }

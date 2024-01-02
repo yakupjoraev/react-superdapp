@@ -180,7 +180,7 @@ function StepTen() {
         </div>
       </div>
 
-      <Footer/>
+      <Footer showWallet={true} showActivity={true} showDashboard={false} activeItem="activity" />
     </div>
   )
 }
