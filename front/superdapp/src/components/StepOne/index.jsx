@@ -6,14 +6,18 @@ function StepOne() {
 
         <h1 className="title">
           WELCOME<br />
-          TO  <span>XWALLET</span>
+          TO  <i>super</i>
         </h1>
 
         <p className="text">
-          <span className="text--uppercase">XWallet</span> Browser Extension it's a secure wallet that allows you to store, withdraw and deposit cryptocurrencies from your browser.
+        Super Browser Extension it's a secure wallet that allows you to store, withdraw and deposit cryptocurrencies from your browser.
         </p>
 
         <a className="btn" href="#">START</a>
+
+        <div className="start-screen__footer">
+           built on   <a className="start-screen__footer-link" href="#">XBANKING</a>
+        </div>
       </div>
     </div>
   )

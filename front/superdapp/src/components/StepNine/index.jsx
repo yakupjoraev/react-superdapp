@@ -21,24 +21,6 @@ function StepNine() {
               </div>
 
               <div className="form__group">
-                <label className="form__label" htmlFor="">Asset</label>
-
-                <div className="form__input form__block">
-                  <div className="form__pic">
-                    <img className="form__pic-icon" width="14" height="23" src="./img/ethereum.svg" alt="ethereum icon" />
-                  </div>
-
-                  <div className="form__infos">
-                    <p className="form__info text">Ethereum</p>
-                  </div>
-
-                  <div className="form__right">
-                    <p className="form__right-text text">24% APR</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="form__group">
                 <label className="form__label" htmlFor="">Select Network</label>
 
                 <div className="form__input form__block">
@@ -47,7 +29,7 @@ function StepNine() {
                   </div>
 
                   <div className="form__infos">
-                    <p className="form__info text">BNB Smart Chain</p>
+                    <p className="form__info text text--grey">BNB Smart Chain</p>
                   </div>
 
                   <div className="form__right">

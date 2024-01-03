@@ -30,7 +30,7 @@ function StepThree() {
           </div>
 
           <div className="content">
-             <h1 className="title">
+             <h1 className="title title--middle">
             Secret Backup<br/>
             Phrase
           </h1>

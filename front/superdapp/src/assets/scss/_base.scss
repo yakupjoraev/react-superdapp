@@ -24,6 +24,14 @@
     font-weight: 800;
     color: var(--primary-color);
   }
+
+  i {
+    text-transform: none;
+    font-size: 40px;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--primary-color);
+  }
 }
 
 .title--middle {

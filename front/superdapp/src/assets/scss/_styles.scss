@@ -3,7 +3,29 @@
   flex-direction: column;
   align-items: center;
   row-gap: 24px;
-  padding: 60px 14px 20px;
+  min-height: 96vh;
+  padding: 60px 12px 20px;
+}
+
+.start-screen__footer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 8px;
+  width: fit-content;
+  margin: auto auto 0;
+
+  font-size: 14px;
+  line-height: 120%;
+  color: var(--primary-color);
+}
+
+.start-screen__footer-link {
+  font-size: 14px;
+  line-height: 120%;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  text-decoration: underline;
 }
 
 .create-password {

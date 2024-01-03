@@ -52,7 +52,7 @@ function StepSix() {
                   </div>
 
                   <div className="form__infos">
-                    <p className="form__info text">BNB Smart Chain</p>
+                    <p className="form__info text text--grey">BNB Smart Chain</p>
                   </div>
 
                   <div className="form__right">
