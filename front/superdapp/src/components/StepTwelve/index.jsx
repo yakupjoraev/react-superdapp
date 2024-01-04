@@ -5,10 +5,10 @@ function StepTwelve() {
     <div className="wrapper">
       <Header />
 
-      <div className="info-pay">
-        <div className="content">
-          <h1 className="title title--mini">Sent</h1>
+      <div className="content">
+        <h1 className="title title--mini">Sent</h1>
 
+        <div className="info-pay">
           <div className="info-pay__currency">
             <div className="info-pay__currency-pic">
               <img src="./img/ethereum.svg" width="35" height="57" alt="ethereum" />
@@ -43,9 +43,10 @@ function StepTwelve() {
             </div>
           </div>
 
-          <a className="btn" href="#">DONE</a>
         </div>
+
       </div>
+      <a className="btn btn--footer" href="#">DONE</a>
     </div>
   )
 }

@@ -17,6 +17,10 @@ import StepTwelve from './components/StepTwelve'
 import StepThirteen from './components/StepThirteen'
 import StepFourteen from './components/StepFourteen'
 import StepFifteen from './components/StepFifteen'
+import StepNineteen from './components/StepNineteen'
+import StepEighteen from './components/StepEighteen'
+import StepSeventeen from './components/StepSeventeen'
+import StepSixteen from './components/StepSixteen'
 
 
 function App() {
@@ -38,6 +42,10 @@ function App() {
       <div className="steps-item"><StepThirteen/></div>
       <div className="steps-item"><StepFourteen/></div>
       <div className="steps-item"><StepFifteen/></div>
+      <div className="steps-item"><StepSixteen/></div>
+      <div className="steps-item"><StepSeventeen/></div>
+      <div className="steps-item"><StepEighteen/></div>
+      <div className="steps-item"><StepNineteen/></div>
     </div>
   )
 }

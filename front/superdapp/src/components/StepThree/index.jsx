@@ -1,7 +1,8 @@
 function StepThree() {
   return (
     <div className="wrapper">
-      <div className="create-password">
+      <div className="content">
+        <div className="create-password">
           <div className="create-password__steps">
             <div className="create-password__step-line active"></div>
 
@@ -29,8 +30,7 @@ function StepThree() {
             <div className="create-password__step-line"></div>
           </div>
 
-          <div className="content">
-             <h1 className="title title--middle">
+          <h1 className="title title--middle">
             Secret Backup<br/>
             Phrase
           </h1>
@@ -39,9 +39,10 @@ function StepThree() {
             You secret backup phrase makes it easy to <br/>
             back up restore your account.
           </p>
+          
           <p className="text text--yellow">
-           Warning: Never disclose your backup phrase.  <br/>
-           Anyone with this phrase can take your Ether forever.
+            Warning: Never disclose your backup phrase.  <br/>
+            Anyone with this phrase can take your Ether forever.
           </p>
 
           <form className="create-password__form form" action="#">
@@ -67,7 +68,7 @@ function StepThree() {
 
             <button type="submit" className="form__btn btn">CONFIRM</button>
           </form>
-          </div>
+        </div>
       </div>
     </div>
   )

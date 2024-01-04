@@ -6,11 +6,11 @@ function StepSix() {
       <Header/>
 
       <div className="content">
-        <div className="send">
-          <h1 className="title title--mini">
-            SEND
-          </h1>
+        <h1 className="title title--mini">
+          SEND
+        </h1>
 
+        <div className="send">
           <form className="send__form form" action="#">
             <div className="form__groups">
               <div className="form__group">
@@ -86,12 +86,13 @@ function StepSix() {
             </div>
           </form>
 
-          <div className="send__footer">
-            <a className="send__back" href="#">Cancel</a>
-            <a className="btn" href="#">SEND</a>
-          </div>
         </div>
         
+      </div>
+
+      <div className="send__footer btn--footer">
+        <a className="send__back" href="#">Cancel</a>
+        <a className="btn" href="#">SEND</a>
       </div>
     </div>
   )

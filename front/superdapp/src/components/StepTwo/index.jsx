@@ -1,6 +1,7 @@
 function StepTwo() {
 return (
 <div className="wrapper">
+  <div className="content">
   <div className="create-password">
     <div className="create-password__steps">
       <div className="create-password__step-line active"></div>
@@ -27,7 +28,6 @@ return (
       <div className="create-password__step-line"></div>
     </div>
 
-    <div className="content">
       <h1 className="title">
         CREATE<br />
         PASSWORD

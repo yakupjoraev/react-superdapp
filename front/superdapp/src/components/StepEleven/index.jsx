@@ -3,12 +3,12 @@ import Header from "../Header";
 function StepEleven() {
   return (
     <div className="wrapper">
-    <Header />
+      <Header />
 
-      <div className="info-pay">
-        <div className="content">
-          <h1 className="title title--mini">Received</h1>
+      <div className="content">
+        <h1 className="title title--mini">Received</h1>
 
+        <div className="info-pay">
           <div className="info-pay__currency">
             <div className="info-pay__currency-pic">
               <img src="./img/ethereum.svg" width="35" height="57" alt="ethereum" />
@@ -43,9 +43,10 @@ function StepEleven() {
             </div>
           </div>
 
-          <a className="btn" href="#">DONE</a>
         </div>
       </div>
+
+      <a className="btn btn--footer" href="#">DONE</a>
     </div>
   )
 }

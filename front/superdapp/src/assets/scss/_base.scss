@@ -1,4 +1,7 @@
 .wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   width: 100vw;
   min-height: 100vh;
   height: 100%;
@@ -7,6 +10,7 @@
 }
 
 .content {
+  margin-bottom: auto;
   padding: 0 16px;
 }
 
@@ -36,6 +40,10 @@
 
 .title--middle {
   font-size: 32px;
+
+  @media (max-width: 359px) {
+    font-size: 26px;
+  }
 }
 
 .title--mini {
@@ -79,6 +87,7 @@
   border-radius: 100px;
   width: 100%;
   padding: 10px;
+  margin: 0 auto;
   background-color: var(--primary-color);
 
   font-family: var(--secondary-font);
@@ -87,6 +96,11 @@
   line-height: 200%;
   font-weight: 600;
   color: var(--black-color);
+}
+
+.btn--footer {
+  width: calc(100% - 32px);
+  margin: 0 auto 20px;
 }
 
 .red {

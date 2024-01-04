@@ -6,11 +6,11 @@ function StepSeven() {
       <Header/>
 
       <div className="content">
-        <div className="send">
-          <h1 className="title title--mini">
-            Receive
-          </h1>
+        <h1 className="title title--mini">
+          Receive
+        </h1>
 
+        <div className="send">
           <div className="send__qr">
             <img className="send__qr-pic" width="144" height="144" src="./img/qr.png" alt="qr" />
           </div>
@@ -70,11 +70,12 @@ function StepSeven() {
             </div>
           </form>
 
-          <div className="send__footer">
-            <a className="btn" href="#">CLOSE</a>
-          </div>
         </div>
         
+      </div>
+
+      <div className="send__footer btn--footer">
+        <a className="btn" href="#">CLOSE</a>
       </div>
     </div>
   )

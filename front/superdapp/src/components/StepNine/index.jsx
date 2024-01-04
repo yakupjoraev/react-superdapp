@@ -84,11 +84,11 @@ function StepNine() {
             </div>
           </form>
 
-          <div className="send__footer">
-            <a className="send__back" href="#">Close</a>
-            <a className="btn" href="#">CONFIRM</a>
-          </div>
         </div>
+      </div>
+      <div className="send__footer btn--footer">
+        <a className="send__back" href="#">Close</a>
+        <a className="btn" href="#">CONFIRM</a>
       </div>
     </div>
   )
