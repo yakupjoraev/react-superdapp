@@ -6,7 +6,7 @@
   display: flex;
   flex-direction: column;
   row-gap: 8px;
-  margin-bottom: 18px;
+  margin-bottom: 12px;
 }
 
 .form__label {
@@ -68,7 +68,7 @@
 
 .form__words {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   row-gap: 8px;
   column-gap: 8px;
   margin-bottom: 14px;
@@ -78,7 +78,7 @@
   position: relative;
   list-style: decimal;
   list-style-position: inside;
-  padding: 18px 12px;
+  padding: 12px;
   border-radius: 6px;
   background-color: #232323;
 

@@ -3,7 +3,7 @@ import Header from "../Header";
 function StepThirteen() {
   return (
     <div className="wrapper">
-      <Header/>
+     <Header actionType="back" />
 
         <div className="content">
           <h1 className="title title--mini">Dashboard</h1>

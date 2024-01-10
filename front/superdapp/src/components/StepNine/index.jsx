@@ -3,7 +3,7 @@ import Header from "../Header";
 function StepNine() {
   return (
     <div className="wrapper">
-      <Header/>
+    <Header actionType="back" />
 
       <div className="content">
       <div className="staking">
@@ -87,7 +87,6 @@ function StepNine() {
         </div>
       </div>
       <div className="send__footer btn--footer">
-        <a className="send__back" href="#">Close</a>
         <a className="btn" href="#">CONFIRM</a>
       </div>
     </div>

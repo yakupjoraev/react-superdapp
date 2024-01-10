@@ -3,7 +3,7 @@ import Header from "../Header";
 function StepFourteen() {
   return (
     <div className="wrapper">
-    <Header/>
+   <Header actionType="back" />
 
   <div className="staking-process">
     <div className="content">

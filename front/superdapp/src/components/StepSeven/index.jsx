@@ -3,7 +3,7 @@ import Header from "../Header";
 function StepSeven() {
   return (
     <div className="wrapper">
-      <Header/>
+    <Header actionType="back" />
 
       <div className="content">
         <h1 className="title title--mini">
@@ -12,7 +12,7 @@ function StepSeven() {
 
         <div className="send">
           <div className="send__qr">
-            <img className="send__qr-pic" width="144" height="144" src="./img/qr.png" alt="qr" />
+            <img className="send__qr-pic" width="120" height="120" src="./img/qr.png" alt="qr" />
           </div>
 
           <form className="send__form form" action="#">

@@ -3,7 +3,7 @@ import Header from "../Header";
 function StepSeventeen() {
 return (
 <div className="wrapper">
-  <Header />
+<Header actionType="back" />
 
   <div className="content">
     <h1 className="title title--mini">Manage accounts</h1>

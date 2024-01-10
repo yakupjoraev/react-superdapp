@@ -35,6 +35,17 @@ body {
   }
 }
 
+* {
+  scrollbar-color: var(--primary-color) var(--black-color);
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+
+}
+
 // Animations
 // Fade
 @keyframes fade {

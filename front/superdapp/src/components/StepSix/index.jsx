@@ -3,7 +3,7 @@ import Header from "../Header";
 function StepSix() {
   return (
     <div className="wrapper">
-      <Header/>
+     <Header actionType="back" />
 
       <div className="content">
         <h1 className="title title--mini">
@@ -91,7 +91,6 @@ function StepSix() {
       </div>
 
       <div className="send__footer btn--footer">
-        <a className="send__back" href="#">Cancel</a>
         <a className="btn" href="#">SEND</a>
       </div>
     </div>

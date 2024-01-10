@@ -10,34 +10,32 @@ function StepThree() {
               <div className="create-password__step-num">
                 <img src="./img/icons/check.svg" alt="check icon" />
               </div>
-              <p className="create-password__step-text">Create <br/> Password</p>
+              <p className="create-password__step-text">Create Password</p>
             </div>
 
             <div className="create-password__step-line create-password__step-line--second active"></div>
 
             <div className="create-password__step active">
               <div className="create-password__step-num">2</div>
-              <p className="create-password__step-text">Secure <br/> Wallet</p>
+              <p className="create-password__step-text">Secure Wallet</p>
             </div>
 
             <div className="create-password__step-line create-password__step-line--second"></div>
 
             <div className="create-password__step">
               <div className="create-password__step-num">3</div>
-              <p className="create-password__step-text">Confirm <br/> Protection</p>
+              <p className="create-password__step-text">Confirm Protection</p>
             </div>
 
             <div className="create-password__step-line"></div>
           </div>
 
           <h1 className="title title--middle">
-            Secret Backup<br/>
-            Phrase
+            Secret Backup Phrase
           </h1>
 
           <p className="text">
-            You secret backup phrase makes it easy to <br/>
-            back up restore your account.
+            You secret backup phrase makes it easy to back up restore your account.
           </p>
           
           <p className="text text--yellow">

@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "SUPERDAPP",
+  "short_name": "SP",
+  "version": "1.0.0",
+  "description": "A basic example extension with only required keys",
+  "icons": {
+    "16": "./img/favicon/favicon-16x16.png",
+    "32": "./img/favicon/favicon-32x32.png",
+    "48": "./img/favicon/favicon.ico",
+    "128": "./img/favicon/mstile-70x70.png"
+  },
+
+  "theme_color": "#000000",
+  "background_color": "#000000",
+  "display": "standalone"
+}

@@ -1,5 +1,5 @@
 .header {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
 }
 
 .header__inner {
@@ -8,12 +8,46 @@
   justify-content: space-between;
 }
 
-.header__settings {}
+.header__actions {}
 
-.header__settings-icon {
+.header__action {}
+
+.header__action-back {
   width: 24px;
   height: 24px;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
 }
+
+.header__action-settings {
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  outline: 0;
+  border: 0;
+
+  img {
+    width: 24px;
+    height: 24px;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
 
 .header__select {}
 

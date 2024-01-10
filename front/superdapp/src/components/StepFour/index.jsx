@@ -46,7 +46,7 @@ return (
       </p>
 
       <form className="create-password__form form" action="#">
-        <button type="submit" className="form__btn btn">DONE</button>
+        <button type="submit" className="btn">DONE</button>
       </form>
     </div>
   </div>
