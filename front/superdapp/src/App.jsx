@@ -21,6 +21,10 @@ import StepSixteen from './components/StepSixteen'
 import StepSeventeen from './components/StepSeventeen'
 import StepEighteen from './components/StepEighteen'
 import StepNineteen from './components/StepNineteen'
+import StepTwenty from './components/StepTwenty'
+import StepTwentyOne from './components/StepTwentyOne'
+import StepTwentyTwo from './components/StepTwentyTwo'
+import StepTwentyThree from './components/StepTwentyThree'
 
 
 function App() {
@@ -46,6 +50,10 @@ function App() {
       <StepSeventeen/>
       <StepEighteen/>
       <StepNineteen/>
+      <StepTwenty/>
+      <StepTwentyOne/>
+      <StepTwentyTwo/>
+      <StepTwentyThree/>
     </div>
 
   )

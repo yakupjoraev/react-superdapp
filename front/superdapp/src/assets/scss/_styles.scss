@@ -61,7 +61,9 @@
 }
 
 .staking-process__pic {
-  margin-bottom: 40px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto 40px;
 }
 
 .staking-process__support {
@@ -489,5 +491,7 @@
 
 .wallet {
   overflow-y: auto;
-  overflow-x: visible;
+  overflow-x: hidden;
+  margin: 0 -20px;
+  padding: 16px;
 }
