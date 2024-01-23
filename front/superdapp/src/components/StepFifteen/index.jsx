@@ -8,7 +8,7 @@ function StepFifteen() {
     <div className="staking-process">
       <div className="content">
         <h1 className="title title--mini">
-          Staking process
+          Transaction
         </h1>
 
         <div className="staking-process__result">

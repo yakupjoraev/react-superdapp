@@ -420,7 +420,8 @@
   height: 120px;
 }
 
-.activites {
+.activites,
+.activities {
   display: flex;
   flex-direction: column;
   row-gap: 24px;
@@ -465,7 +466,9 @@
   border-radius: 100%;
 }
 
-.active__pic-icon {}
+.active__pic-icon {
+  border-radius: 100%;
+}
 
 .active__texts {
   display: flex;

@@ -1,8 +1,37 @@
-import Footer from "../Footer";
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import Header from "../Header";
-
+import Footer from "../Footer";
+import screen from "../../main";
+import { useEffect, useState } from "react";
+import { Keypair, Connection, clusterApiUrl, LAMPORTS_PER_SOL, SystemProgram, sendAndConfirmTransaction, PublicKey, Transaction } from "@solana/web3.js";
+import { getAccount, addToAccount } from "../../systems/storage/store";
+import * as buffer from "buffer";
+import load from "../../functions/loader";
+import { ToastContainer, toast } from 'react-toastify';
+import defaults from "../../crypto/defaults";
+import { Fade } from "react-awesome-reveal";
+import axios from "axios";
+window.Buffer = buffer.Buffer;
 function StepEigth() {
+  const [callData, setCallData] = useState([]);
+  const [sol_per, setSolPercent] = useState(0);
+  useEffect(() => {
+
+    async function start() {
+      const rawData = await axios.get('https://api.xbanking.org/api/v2/assets');
+      const calldata = rawData.data;
+      const call = calldata.find(find => find.ticker === 'sol')
+      // setCallData(calldata)
+      await addToAccount('staking_data', call);
+      setSolPercent((call.rates[0].apy * 100).toFixed(2));
+    }
+    start()
+  }, [])
+  if (screen.current != 8) return null;
   return (
+    <div>
+    <Fade cascade duration={500}>
     <div className="wrapper">
    <Header actionType="back" />
 
@@ -31,59 +60,21 @@ function StepEigth() {
               </button>
             </div>
 
-            <div className="wallet__token">
+            <div onClick={() => {
+              load(9);
+            }} className="wallet__token">
               <div className="wallet__token-infos">
                 <div className="wallet__token-pic">
-                  <img src="./img/ethereum.svg" width="14" height="23" alt="ethereum" />
+                  <img src="./img/solana.svg" width="24" height="24" alt="SOL" />
                 </div>
 
                 <div className="wallet__token-info">
-                  <p className="wallet__token-name text">Ethereum</p>
-                  {/* <div className="wallet__token-bottom">
-                    <div className="wallet__token-count text--grey">
-                      $2.44
-                    </div>
-
-                    <div className="wallet__token-percent yellow">
-                      +4.73%
-
-                      <img className="wallet__token-arrow" src="./img/icons/percent-up.svg" alt="percent-up" />
-                    </div>
-                  </div> */}
+                  <p className="wallet__token-name text">Solana</p>
                 </div>
               </div>
 
               <div className="wallet__token-sums">
-                <p className="wallet__token-sum text">24% APR</p>
-                {/* <p className="wallet__token-sum text--grey">$17,437.81</p> */}
-              </div>
-            </div>
-
-            <div className="wallet__token">
-              <div className="wallet__token-infos">
-                <div className="wallet__token-pic">
-                  <img src="./img/bitcoin.svg" width="36" height="36" alt="Bitcoin" />
-                </div>
-
-                <div className="wallet__token-info">
-                  <p className="wallet__token-name text">Bitcoin</p>
-                  {/* <div className="wallet__token-bottom">
-                    <div className="wallet__token-count text--grey">
-                      $64.723.12
-                    </div>
-
-                    <div className="wallet__token-percent red">
-                      -1.22%
-
-                      <img className="wallet__token-arrow" src="./img/icons/percent-down.svg" alt="percent-down" />
-                    </div>
-                  </div> */}
-                </div>
-              </div>
-
-              <div className="wallet__token-sums">
-                <p className="wallet__token-sum text">24% APR</p>
-                {/* <p className="wallet__token-sum text--grey">$620,372.13</p> */}
+                <p className="wallet__token-sum text">{sol_per}% APR</p>
               </div>
             </div>
           </div>
@@ -91,6 +82,8 @@ function StepEigth() {
       </div>
 
       <Footer showWallet={true} showActivity={true} showDashboard={true} />
+    </div>
+    </Fade>
     </div>
   )
 }

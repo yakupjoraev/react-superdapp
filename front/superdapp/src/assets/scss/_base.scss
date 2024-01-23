@@ -1,3 +1,8 @@
+html {
+  width: 400px;
+  height: 600px;
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -8,6 +13,7 @@
   min-height: 600px;
   height: 600px;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 20px;
   background-color: var(--black-color);
 }
@@ -102,9 +108,38 @@
   color: var(--black-color);
 }
 
+.btn_disabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  width: 100%;
+  padding: 10px;
+  margin: 0 auto;
+  background-color: #848484;
+
+  font-family: var(--secondary-font);
+  text-align: center;
+  font-size: 16px;
+  line-height: 200%;
+  font-weight: 600;
+  color: var(--black-color);
+}
+
 .btn--footer {
   width: calc(100% - 32px);
   margin: 0 auto;
+}
+
+.btn--transparent {
+  display: inline-flex;
+  margin: 0 auto;
+  font-family: var(--secondary-font);
+  text-align: center;
+  font-size: 16px;
+  line-height: 200%;
+  font-weight: 600;
+  color: var(--white-color);
 }
 
 .red {

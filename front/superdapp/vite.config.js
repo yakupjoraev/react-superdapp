@@ -3,8 +3,6 @@ import react from '@vitejs/plugin-react'
 import autoprefixer from 'autoprefixer'
 // import manifestSRI from 'vite-plugin-manifest-sri'
 
-
-
 // https://vitejs.dev/config/
 export default defineConfig({
   base: '',
@@ -12,7 +10,6 @@ export default defineConfig({
     react(),
     // manifestSRI(),
   ],
-
   css: {
     postcss: {
       plugins: [

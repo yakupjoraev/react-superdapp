@@ -4,7 +4,9 @@
 
 import StepOne from './components/StepOne'
 import StepTwo from './components/StepTwo'
-import StepThree from './components/StepThree'
+import StepThree from './components/StepThree/index'
+import StepThreeOut from './components/StepThree/StepThreeOut'
+import StepThreeImportWallet from './components/StepThreeImportWallet'
 import StepFour from './components/StepFour'
 import StepFive from './components/StepFive'
 import StepSix from './components/StepSix'
@@ -25,15 +27,50 @@ import StepTwenty from './components/StepTwenty'
 import StepTwentyOne from './components/StepTwentyOne'
 import StepTwentyTwo from './components/StepTwentyTwo'
 import StepTwentyThree from './components/StepTwentyThree'
-
+import LockScreen from './components/LockScreen'
+import screen from './main'
 
 function App() {
+  if(screen.current == 'lock') return <div><LockScreen/></div>
+  if(screen.current == 1) return <div><StepOne/></div>
+  if(screen.current == 2) return <div><StepTwo/></div>
+  if(screen.current == 3) return <div><StepThree/></div>
+  if(screen.current == '3out') return <div><StepThreeOut/></div>
+  if(screen.current == 4) return <div><StepFour/></div>
+  if(screen.current == 5) return <div><StepFive/></div>
+  if(screen.current == 8) return <div><StepEigth/></div>
+  if(screen.current == 9) return <div><StepNine/></div>
+    //8 - staking and pools
+    // 9 - otpravka
+    // 13 -dashboard
+  if(screen.current == 6) return <div><StepSix/></div>
+  if(screen.current == 7) return <div><StepSeven/></div>
+  if(screen.current == 10) return <div><StepTen/></div>
+  if(screen.current == 11) return <div><StepEleven/></div>
+  if(screen.current == 12) return <div><StepTwelve/></div>
+  if(screen.current == 14) return <div><StepFourteen/></div>
+  if(screen.current == 16) return <div><StepSixteen/></div>
+  if(screen.current == 17) return <div><StepSeventeen/></div>
+  if(screen.current == 18) return <div><StepEighteen/></div>
+  if(screen.current == 19) return <div><StepNineteen/></div>
 
+  ////new///////////////
+
+  if(screen.current == 20) return <div><StepTwenty/></div>
+  if(screen.current == 21) return <div><StepTwentyOne/></div>
+  if(screen.current == 22) return <div><StepTwentyTwo/></div>
+  if(screen.current == 23) return <div><StepTwentyThree/></div>
+
+  //Import wallet = не знаю куда
+  if(screen.current == 24) return <div><StepThreeImportWallet/></div>
+
+  //////////////
   return (
     <div>
       <StepOne/>
       <StepTwo/>
       <StepThree/>
+      <StepThreeImportWallet/>
       <StepFour/>
       <StepFive/>
       <StepSix/>

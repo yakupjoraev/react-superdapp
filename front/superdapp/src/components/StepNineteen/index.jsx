@@ -1,6 +1,16 @@
+/* eslint-disable no-unused-vars */
 import Header from "../Header";
+import load from "../../functions/loader";
+import screen from "../../main";
+import { useDispatch } from 'react-redux';
+
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from "react";
+import { getAccount, addToAccount } from "../../systems/storage/store";
 
 function StepNineteen() {
+  if (screen.current != 19) return null;
 return (
 <div className="wrapper">
 <Header actionType="back" />
@@ -40,7 +50,7 @@ return (
 
   </div>
 
-  <a className="btn btn--footer" href="#">CLOSE</a>
+  <a onClick={() => {load(16)}} className="btn btn--footer" href="#">BACK</a>
 </div>
 )
 }

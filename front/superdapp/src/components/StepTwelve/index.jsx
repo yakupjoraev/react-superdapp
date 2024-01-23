@@ -1,7 +1,24 @@
+/* eslint-disable no-unused-vars */
 import Header from "../Header";
-
+import Footer from "../Footer";
+import screen from "../../main";
+import load from "../../functions/loader";
+import axios from 'axios'
+import { useEffect, useState } from "react";
+import history_sol from "../../crypto/sol/history";
+import { getAccount, addToAccount } from "../../systems/storage/store";
+import { Fade, Zoom, Slide } from "react-awesome-reveal";
 function StepTwelve() {
+  if (screen.current != 12) return null;
+  const tx = JSON.parse(localStorage.currentTx)
+  const prof = tx.source;
+  const resultf = prof.match(/^.{5}/g)
+  const result = prof.match(/.{4}(?=($|\r|\n))/g);
+  const srs = `${resultf}...${result}`;
   return (
+    <div>
+    <Fade duration={500}>
+    <Slide direction="left" fraction="0" duration={150}>
     <div className="wrapper">
      <Header actionType="back" />
 
@@ -11,16 +28,16 @@ function StepTwelve() {
         <div className="info-pay">
           <div className="info-pay__currency">
             <div className="info-pay__currency-pic">
-              <img src="./img/ethereum.svg" width="35" height="57" alt="ethereum" />
+              <img src="./img/solana.svg" width="35" height="57" alt="solana" />
             </div>
 
-            <p className="info-pay__currency-text red">-0.01421 ETH</p>
+            <p className="info-pay__currency-text red">-{tx.summ} SOL</p>
           </div>
 
           <div className="info-pay__info">
             <div className="info-pay__row">
               <span>Date</span>
-              <span>20 Dec, 2023 at 3.24 pm</span>
+              <span>{tx.date}</span>
             </div>
 
             <div className="info-pay__row">
@@ -30,23 +47,26 @@ function StepTwelve() {
 
             <div className="info-pay__row">
               <span>From</span>
-              <span>5srA...kxEi</span>
+              <span>{srs}</span>
             </div>
 
             <div className="info-pay__row">
               <span>Network</span>
-              <span>Ethereum ERC-20</span>
+              <span>Solana Network</span>
             </div>
 
             <div className="info-pay__row info-pay__row--center">
-              <a className="info-pay__info-link" href="#">View on Explorer</a>
+            <a href={`https://solscan.io/tx/${tx.tx}?cluster=testnet`} className="info-pay__info-link">View on Explorer</a>
             </div>
           </div>
 
         </div>
 
       </div>
-      <a className="btn btn--footer" href="#">DONE</a>
+      <a onClick={() => load(10)} className="btn btn--footer" href="#">BACK</a>
+    </div>
+    </Slide>
+      </Fade>
     </div>
   )
 }
