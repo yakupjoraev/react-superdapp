@@ -1,9 +1,13 @@
 /* eslint-disable no-unused-vars */
-import { Keypair, Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/web3.js";
+import { useEffect, useState } from "react";
+import { Keypair, Connection, LAMPORTS_PER_SOL } from "@solana/web3.js";
 import { getAccount, addToAccount } from "../../systems/storage/store";
-import axios from 'axios'
+import axios from 'axios';
 import { getToken } from "./history";
-
+import defaults from "../../crypto/defaults";
+import { Fade } from 'react-awesome-reveal';
+import { mnemonicToSeed, generateMnemonic } from "bip39";
+import { fromMasterSeed } from "hdkey";
 const derivePath = "m/44'/501'/0'/0'"
 
 export default async function data_sol() {
@@ -20,13 +24,12 @@ export default async function data_sol() {
             );
 
             let allBalance = 0;
-            const { seed } = acc; 
+            const { seed } =  await getAccount(); 
             const dat = await axios.get(`https://api.cryptorank.io/v0/tickers?isTickersForPriceCalc=true&limit=1&coinKeys=solana`)
-
-            const sd = await window.bitcoin.bip39.mnemonicToSeed(seed);
-            const masterNode = window.bitcoin.bip32.fromSeed(sd);
-            const derivedKey = masterNode.derivePath(derivePath);
-            const keypairs = Keypair.fromSeed(derivedKey.__D);
+            const seedx = await mnemonicToSeed(seed)
+            const masterNode = fromMasterSeed(seedx);
+            const derivedKey = masterNode.derive(derivePath);
+            const keypairs = Keypair.fromSeed(derivedKey._privateKey);
 
             const balance_sol = await connection.getBalance(keypairs.publicKey);
             const tokens = await axios.get(`https://api.solana.fm/v1/addresses/${keypairs.publicKey.toString()}/tokens`)
@@ -51,7 +54,10 @@ export default async function data_sol() {
                     }
                     spl_tokens_balances_data[dat.tokenList.symbol] = {
                         balance: tokenInfo.balance,
-                        image
+                        image,
+                        contract: tokenAddress,
+                        chain: 'solana',
+                        decimals: dat.decimals
                     };
                     spl_tokens_prices_data[dat.tokenList.symbol] = {
                         usd: 0,
@@ -64,7 +70,7 @@ export default async function data_sol() {
             const balancefinal_sol = balance_sol / LAMPORTS_PER_SOL
             const finaldollarbalance_sol = parseFloat(parseFloat(dat.data.data[0].usdLast) * balancefinal_sol).toFixed(2)
             allBalance += + finaldollarbalance_sol
-            await addToAccount('balances', [{ summ: allBalance, sol: { balance: balancefinal_sol, usd: finaldollarbalance_sol, image: './img/solana.svg' }, ...spl_tokens_balances_data}]);
+            await addToAccount('balances', [{ summ: allBalance, sol: { balance: balancefinal_sol, usd: finaldollarbalance_sol, image: './img/solana.svg', contract: 'solana', chain: 'solana' }, ...spl_tokens_balances_data}]);
             // await addToAccount('prices', [{sol: { parseFloat(dat.data.data[0].usdLast).toFixed(2) }, ...spl_tokens_prices_data} ] );
             await addToAccount('prices', [{ sol: { usd: parseFloat(dat.data.data[0].usdLast).toFixed(2) }, ...spl_tokens_percents_data}]);
             await addToAccount('percents', [{ sol: { percent: parseFloat(dat.data.data[0].change).toFixed(2) }, ...spl_tokens_percents_data}]);

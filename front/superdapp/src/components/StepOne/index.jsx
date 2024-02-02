@@ -27,8 +27,8 @@ function StepOne() {
         </p>
 
         {/* <a className="btn" onClick={() => { load(2) }} href="#">START</a> */}
-        <a className="btn" href="#"><b>Create new wallet</b></a>
-        <a className="btn--transparent" href="#">Import wallet</a>
+        <a className="btn" onClick={() => { load(2) }}  href="#"><b>Create new wallet</b></a>
+        <a onClick={() => { load('import') }} className="btn--transparent " href="#">Import wallet</a>
 
         <div className="start-screen__footer">
            built on   <a className="start-screen__footer-link" href="#">XBANKING</a>

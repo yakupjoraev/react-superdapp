@@ -12,6 +12,8 @@ import { ToastContainer, toast } from 'react-toastify';
 import defaults from "../../crypto/defaults";
 import { Fade } from "react-awesome-reveal";
 import axios from "axios";
+import { mnemonicToSeed, generateMnemonic } from "bip39";
+import { fromMasterSeed } from "hdkey";
 window.Buffer = buffer.Buffer;
 function StepNine() {
   const [balances, updateBalances] = useState(defaults.balances);
@@ -64,10 +66,10 @@ function StepNine() {
       'confirmed',
     );
     const derivePath = "m/44'/501'/0'/0'"
-    const sd = await window.bitcoin.bip39.mnemonicToSeed(account.seed)
-    const masterNode = window.bitcoin.bip32.fromSeed(sd);
-    const derivedKey = masterNode.derivePath(derivePath);
-    const keypairs = Keypair.fromSeed(derivedKey.__D);
+    const seedx = await mnemonicToSeed(account.seed)
+    const masterNode = fromMasterSeed(seedx);
+    const derivedKey = masterNode.derive(derivePath);
+    const keypairs = Keypair.fromSeed(derivedKey._privateKey);
     try {
     const value = document.getElementById("amount").value.toString();
     const ammo = parseFloat(value) * 1000000000;

@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Header from "../Header";
 import Footer from "../Footer";
+import Loading from "../Loading";
 import screen from "../../main";
 import load from "../../functions/loader";
 import axios from 'axios'
@@ -11,7 +12,9 @@ import { getAccount, addToAccount } from "../../systems/storage/store";
 import { Fade, Zoom, Slide, Rotate } from "react-awesome-reveal";
 function StepTen() { 
   const [allTransactions, setTransactions] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [load, setLoad] = useState(false);
+  const [loading, setLoading] = useState(true);
+
   function setTx(tr) {
     localStorage.currentTx = tr;
     const transaction = JSON.parse(tr);
@@ -25,6 +28,7 @@ function StepTen() {
     async function fetchData() {
       try {
         const acc = await getAccount();
+        setLoading(true);
         if (acc.transactions != undefined) {
           const asyncTasks = acc.transactions.map(async (element) => {
             const combinedArray = [];
@@ -45,14 +49,14 @@ function StepTen() {
         const resultsArray = await Promise.all(promises);
         const latestData = resultsArray[resultsArray.length - 1];
         setTransactions(latestData);
-        console.log(latestData)
+        setLoading(false);
       } catch (error) {
         console.error(error);
       }
     }
     fetchData();
   }, []);
-  if (screen.current !== 10 || loading) return null;
+  if (screen.current !== 10 || load) return null;
   return (
         <div>
         <Fade cascade duration={500}>
@@ -63,6 +67,8 @@ function StepTen() {
       <h1 className="title title--mini">Recent activity</h1>
 
       <div id="activities" className="activites">
+
+      {loading && <Loading className="loading--top" />}
 
       <div id="activities" className="activities">
       {allTransactions.map((transaction, index) => (

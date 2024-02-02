@@ -5,18 +5,19 @@ import load from "../../functions/loader";
 import screen from "../../main";
 import { ToastContainer, toast } from 'react-toastify';
 import { Fade } from "react-awesome-reveal";
-import { getAccount } from "../../systems/storage/store";
+import { addToAccount, getAccount } from "../../systems/storage/store";
 import { useEffect, useState } from "react";
 
 function LockScreen() {
-  const [account, getAcc] = useState()
+  const [account, setAccount] = useState()
   useEffect(() => {
     async function start() {
-        getAcc(await getAccount());
+      await addToAccount('lock', true);
+      setAccount(await getAccount());
     }
     start()
-  })
-  if (screen.current != 'lock') return null;
+  }, [])
+  if(screen.current != 'lock') return null;
   return (
     <div className="wrapper">
             <div>
@@ -29,7 +30,7 @@ closeOnClick
 rtl={false}
 pauseOnFocusLoss
 draggable
-pauseOnHover
+pauseOnHover 
 theme="dark"
 />
       </div>
@@ -47,13 +48,11 @@ theme="dark"
 
         <div className="form__input-wrapper">
         <img className="form__icon" src="./img/icons/password.svg" alt="link-outline icon" />
-                  <input className="form__input" id="address" placeholder="Enter your password" />
+                  <input type="password" className="form__input" id="address" placeholder="Enter your password" />
                 </div>
               
 &nbsp;
-        <a className="btn" onClick={() => { 
-            console.log(account.value)
-            console.log(document.getElementById('address').value)
+        <a className="btn" onClick={async () => { 
             if(document.getElementById('address').value != account.value) {
                 return toast.error('Wrong password', {
                     position: "top-right",
@@ -66,7 +65,8 @@ theme="dark"
                     theme: "dark",
                 })
             }
-            load(5) 
+            await addToAccount('lock', false)
+            await load(5) 
         }} href="#">UNLOCK</a>
 
         <div className="start-screen__footer">

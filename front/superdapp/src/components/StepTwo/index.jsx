@@ -9,12 +9,20 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from "react";
 import { getAccount, addToAccount } from "../../systems/storage/store";
+import { useState } from "react";
 
 function StepTwo() {
+  const [isImport, setImport] = useState(false);
   useEffect(() =>{
     async function start() {
-      const account = await getAccount();
-      if(account) return load(3)
+      const account = await getAccount()
+      if(account) {
+        if(!account.isImport) {
+          return load(3)
+        } else {
+          setImport(true);
+        }
+      }
     }
     start()
   }, [])
@@ -106,8 +114,11 @@ theme="dark"
               progress: undefined,
               theme: "dark",
             });
-            const key = 'password';
+            const key = 'value';
             await addToAccount(key, await value);
+            if(isImport) {
+              return await load(4);
+            }
             await load(3) 
           }} 
             className="form__btn btn">CREATE</button>

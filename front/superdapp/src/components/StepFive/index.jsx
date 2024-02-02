@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import Header from "../Header";
 import Footer from "../Footer";
+import Loading from "../Loading";
 import screen from "../../main";
 import load from "../../functions/loader";
 import { useEffect, useState } from "react";
@@ -10,18 +11,22 @@ import { getAccount, addToAccount } from "../../systems/storage/store";
 import data_sol from "../../crypto/sol/start";
 import defaults from "../../crypto/defaults";
 import { Fade } from 'react-awesome-reveal';
-
+import { mnemonicToSeed, generateMnemonic } from "bip39";
+import { fromMasterSeed } from "hdkey";
 function StepFive() {
   const [balances, setBalances] = useState(defaults.balances);
   const [percents, setPercents] = useState(defaults.percents);
   const [prices, setPrices] = useState(defaults.prices);
   const [sortOrder, setSortOrder] = useState('asc'); // Состояние для отслеживания порядка сортировки
+  const [loading, setLoading] = useState(true);
 
   const handleSortClick = () => {
     if (!balances[0] || typeof balances[0] !== 'object') {
       // Если balances[0] не является объектом, выходим из функции
       return;
     }
+
+
   
     // Инвертируйте порядок сортировки при каждом клике
     setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc');
@@ -43,7 +48,7 @@ function StepFive() {
     // Обновите состояние с отсортированным объектом
     setBalances([{ ...Object.fromEntries(sortedBalances) }]);
   };
-  
+  console.log(balances);
 
   useEffect(() => {
     const connection = new Connection(
@@ -56,10 +61,10 @@ function StepFive() {
     async function getAirdrop(acc) {
       const { airdrop, seed } = acc;
       if (airdrop != undefined) return null;
-      const sd = await window.bitcoin.bip39.mnemonicToSeed(seed);
-      const masterNode = window.bitcoin.bip32.fromSeed(sd);
-      const derivedKey = masterNode.derivePath(derivePath);
-      const keypairs = Keypair.fromSeed(derivedKey.__D);
+      const seedx = await mnemonicToSeed(seed)
+      const masterNode = fromMasterSeed(seedx);
+      const derivedKey = masterNode.derive(derivePath);
+      const keypairs = Keypair.fromSeed(derivedKey._privateKey);
       const airdropSignature = await connection.requestAirdrop(
         keypairs.publicKey,
         LAMPORTS_PER_SOL,
@@ -73,7 +78,7 @@ function StepFive() {
     async function startScreen(acc) {
       if(acc.firststart == true) {
         await addToAccount('firststart', false);
-        await window.location.reload();
+        window.location.reload();
       }
       if (acc.balances) {
         setBalances(acc.balances);
@@ -84,8 +89,6 @@ function StepFive() {
       if(acc.percents) {
         setPercents(acc.percents)
       }
-
-      console.log(acc)
 
       const promises = [data_sol()];
       try {
@@ -100,13 +103,21 @@ function StepFive() {
     }
 
     async function start() {
+      setLoading(true);
       const result = await getAccount();
       await startScreen(result);
+      setLoading(false);
     }
     start();
+    setInterval(start, 10000);
   }, []);
 
-  if (screen.current != 5) return null;
+  // if (loading) {
+  //   return <Loading />;
+  // }
+  
+  if (screen.current !== 5)
+ return null;
 
   return (
     <div>
@@ -115,11 +126,23 @@ function StepFive() {
           <Header show="5" actionType="settings" />
 
           <div className="wallet">
-            <div className="wallet__banners">
+          <div className="wallet__banners">
               <div className="wallet__banner1"></div>
               <div className="wallet__banner2"></div>
               <div className="wallet__banner3"></div>
             </div>
+            
+            {/* <div className="wallet_banners">
+              <div className="wallet__banner">
+                <p className="wallet__banner-text">50% discount!</p>
+              </div>
+              <div className="wallet__banner">
+                <p className="wallet__banner-text">50% discount!</p>
+              </div>
+              <div className="wallet__banner">
+                <p className="wallet__banner-text">50% discount!</p>
+              </div>
+          </div> */}
 
             <div className="wallet__invoice">
               <div className="wallet__invoice-sum">
@@ -145,6 +168,8 @@ function StepFive() {
             </div>
 
             <div className="wallet__tokens">
+          {loading && <Loading />}
+
               <div className="wallet__tokens-header">
                 <p className="wallet__tokens-label">Tokens</p>
 
@@ -152,7 +177,7 @@ function StepFive() {
                   <img src="./img/icons/sort-solid.svg" alt="sort-solid" />
                </button>
               </div>
-
+          
               {balances.length > 0 &&
                 Object.entries(balances[0]).map(([tokenName, tokenData], index) => (
                   tokenName !== "summ" && tokenData.image !== undefined && tokenData.image !== null && (

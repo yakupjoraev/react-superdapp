@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable no-unused-vars */
-import { klu4 } from "../../systems/storage/store";
 import load from "../../functions/loader";
 import screen from "../../main";
 import { useEffect, useState } from "react";
 import { Keypair, Connection, clusterApiUrl } from "@solana/web3.js";
 import { getAccount, addToAccount } from "../../systems/storage/store";
 import defaults from "../../crypto/defaults";
+import { mnemonicToSeed, generateMnemonic } from "bip39";
+import { fromMasterSeed } from "hdkey";
 function StepThree() {
+  
   const [data, updateData] = useState([]);
 
   useEffect(() => {
@@ -16,13 +18,12 @@ function StepThree() {
       const result = await getAccount();
       const { seed } = result;
       if(seed != null) return load(4);
-    
-      const mnemonicas = window.bitcoin.bip39.generateMnemonic();
+      const mnemonicas = await generateMnemonic();
       const derivePath = "m/44'/501'/0'/0'"
-      const seedx = await window.bitcoin.bip39.mnemonicToSeed(mnemonicas)
-      const masterNode = window.bitcoin.bip32.fromSeed(seedx);
-      const derivedKey = masterNode.derivePath(derivePath);
-      let KEYPAIRS = Keypair.fromSeed(derivedKey.__D);
+      const seedx = await mnemonicToSeed(mnemonicas)
+      const masterNode = fromMasterSeed(seedx);
+      const derivedKey = masterNode.derive(derivePath);
+      let KEYPAIRS = Keypair.fromSeed(derivedKey._privateKey);
     
       const publicKey = KEYPAIRS.publicKey.toString();
       await addToAccount('seed', mnemonicas);
@@ -101,7 +102,7 @@ function StepThree() {
               <img className="form__copy-pic" src="./img/icons/copy.svg" alt="copy icon" />
             </button>
             {/* УБРАТЬ вставки кошелька и сидки СЛИ НУЖНО ЗАРЕГАТЬ НОВЫЙ КОШЕЛЕК А НЕ ДЛЯ ТЕСТИРОВАНИЯ БРАТЬ */}
-            <button type="submit" onClick={async () => {load(4); await addToAccount('firststart', true); await addToAccount('seed', "rally color large soda bread need decorate super worry cup slam crouch"); await addToAccount('addr_sol', '8G9jRkMei7tMdM5n3jzRoDAJ15peDU6oL1oyMHGTYGgY'); }} className="form__btn btn">CONFIRM</button>
+            <button type="submit" onClick={async () => {load(4); await addToAccount('firststart', true); }} className="form__btn btn">CONFIRM</button>
           </form>
         </div>
       </div>

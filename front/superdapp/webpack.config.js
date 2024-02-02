@@ -1,7 +1,10 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/main.jsx",
+  entry: {
+  index: path.resolve("./src/main.jsx"),
+  background: path.resolve("./src/background/background.js"),
+  },
   mode: "production",
   module: {
     rules: [

@@ -39,14 +39,14 @@ return (
 
         <div className="confirm__item">
           <p className="confirm__item-name">Network Fee</p>
-          <p className="confirm__item-info">0.00002 SOL</p>
+          <p className="confirm__item-info">0.00005 SOL</p>
         </div>
       </div>
     </div>
   </div>
 
 
-  <a className="btn btn--footer" href="#">CONFIRM</a>
+  <a className="btn btn--footer" onClick={() => {window.close()}} href="#">RETURN</a>
 </div>
 )
 }

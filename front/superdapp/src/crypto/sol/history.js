@@ -3,10 +3,22 @@ import { Keypair, Connection, clusterApiUrl, LAMPORTS_PER_SOL } from "@solana/we
 import { getAccount, addToAccount } from "../../systems/storage/store";
 import BigNumber from 'bignumber';
 import axios from "axios";
-
+import { mnemonicToSeed, generateMnemonic } from "bip39";
+import { fromMasterSeed } from "hdkey";
 export async function getToken(token_addr) {
-  const tok_curr = await axios.get(`https://api.solana.fm/v1/tokens/${token_addr}`);
-  return tok_curr;
+  const add = JSON.stringify(token_addr);
+  try {
+    const tok_curr = await axios.get(`https://api.solana.fm/v1/tokens/${token_addr}`);
+    return tok_curr;
+  } catch(e) {
+    if (e.response && e.response.status === 404) {
+      console.error(`Токен не найден для адреса: ${token_addr}`);
+      // Возвращаем null или другое значение по умолчанию
+      return null;
+    }
+    console.error('Ошибка при запросе токена:', e);
+    return null;
+  }
 }
 
 export default async function history_sol() {
@@ -24,20 +36,30 @@ export default async function history_sol() {
       if (curr_timestamp - timestamp > (5 * 1000)) {
         await addToAccount('delays', {history_delay: Date.now(), data_delay: delays.data_delay, lock_delay: delays.lock_delay});
         const derivePath = "m/44'/501'/0'/0'"
-        const sd = await window.bitcoin.bip39.mnemonicToSeed(result.seed)
-        const masterNode = window.bitcoin.bip32.fromSeed(sd);
-        const derivedKey = masterNode.derivePath(derivePath);
-        const keypairs = Keypair.fromSeed(derivedKey.__D);
-        const transes = await axios.get(`https://api.solana.fm/v0/accounts/${result.addr_sol}/transfers?utcFrom=0&utcTo=8223321783287231812&limit=100`)
-        console.log(transes)
+        const seedx = await mnemonicToSeed(result.seed)
+        const masterNode = fromMasterSeed(seedx);
+        const derivedKey = masterNode.derive(derivePath);
+        const keypairs = Keypair.fromSeed(derivedKey._privateKey);
+        const transes = await axios.get(`https://api.solana.fm/v0/accounts/${keypairs.publicKey}/transfers?utcFrom=0&utcTo=8223321783287231812&limit=100`)
         const transactions1 = transes.data.results;
-        console.log(transactions1)
-        const transactions = transactions1.filter((element) => element.data[1].action !== 'mintToCollectionV1');
+        const transactions = transactions1.filter((element) => {
+          if (element.data.some(dataElement => dataElement && dataElement.action)) {
+            // Проверка условий для фильтрации
+            const isFilteredTransaction = element.data.every(dataElement =>
+              dataElement.action !== 'mintToCollectionV1'
+            );
+            
+            return isFilteredTransaction;
+          }
+          
+          // Если не хватает необходимых полей, считаем транзакцию невалидной
+          return false;
+        });
         for(let i = 0; i < transactions.length; i ++) {
           const element = transactions[i];
           let transactionData = [];
           let type = '';
-          let transactionHash = '';
+          let transactionHash = element.transactionHash;
           let token_addr = 'So11111111111111111111111111111111111111112';
           let token_name = 'SOL';
           let decimals = LAMPORTS_PER_SOL;
@@ -59,19 +81,28 @@ export default async function history_sol() {
 
           let token_png = `./img/solana.svg`;
 
-          if(token_addr != 'So11111111111111111111111111111111111111112') {
-            console.log(token_addr)
+          if (token_addr !== 'So11111111111111111111111111111111111111112' || token_addr !== '') {
             const tok_curr = await getToken(token_addr);
-            const dat = tok_curr.data;
-            if(dat.tokenMetadata.offChainInfo == null) {
-              token_png = `./img/solana.svg`;
+            // Check if tok_curr is not null before accessing properties
+            if (tok_curr && tok_curr.data) {
+              const dat = tok_curr.data;
+              if (dat.tokenMetadata.offChainInfo == null & dat.tokenList.image == null) {
+                token_png = `./img/solana.svg`;
+              } else {
+                if(dat.tokenMetadata.offChainInfo == null) {
+                  token_png = dat.tokenList.image;
+                } else {
+                  token_png = dat.tokenMetadata.offChainInfo.image
+                }
+
+              }
+              token_name = dat.tokenList.symbol;
+              token_addr = dat.mint;
+              decimals = Math.pow(10, dat.decimals);
             } else {
-              token_png = dat.tokenMetadata.offChainInfo.image
+              console.error(`Token data not available for address: ${token_addr}`);
+              // Handle this case based on your requirements
             }
-            token_name = dat.tokenList.symbol
-            token_addr = dat.mint;
-            decimals = Math.pow(10, dat.decimals);
-            console.log(tok_curr)
           }
           const lamports = transactionData.amount
           const tx = transactionHash;
@@ -90,7 +121,6 @@ export default async function history_sol() {
             token_name,
             token_png,
           };
-          console.log(newTransaction)
           if(lamports) {
             transactions_in_sol.push(newTransaction)
           }
@@ -98,7 +128,6 @@ export default async function history_sol() {
         await addToAccount('transactions', [{sol: transactions_in_sol}]);
         return transactions_in_sol;
       } else {
-        console.log('blya')
         if (result.transactions && result.transactions.length > 0) {
           const solValue = result.transactions[0].sol;
           if (solValue !== undefined) {

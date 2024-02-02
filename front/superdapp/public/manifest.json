@@ -1,20 +1,38 @@
 {
-  "manifest_version": 3,
-  "name": "SUPERDAPP",
-  "short_name": "SP",
-  "version": "1.0.0",
-  "description": "A basic example extension with only required keys",
-  "action": {
-    "default_icon": {
-      "16": "./img/favicon/favicon-16x16.png",
-      "32": "./img/favicon/favicon-32x32.png",
-      "48": "./img/favicon/favicon.ico",
-      "128": "./img/favicon/mstile-70x70.png"
-    },
-  "default_title": "SUPER",
-  "default_popup": "index.html"
+  "author": "xbanking",
+  "description": "Manage your accounts outside of dapps. Injects the accounts and allows signing transactions for a specific account.",
+  "homepage_url": "https:/app.xbanking.org",
+  "name": "SUPER Wallet",
+  "short_name": "SUPER",
+  "version": "1.0",
+  "manifest_version": 2,
+  "permissions": ["storage", "tabs", "scripting", "activeTab"],
+  "background": {
+    "scripts": ["./assets/background.js"],
+    "persistent": true
   },
-  "theme_color": "#000000",
-  "background_color": "#000000",
-  "display": "standalone"
+  "browser_action": {
+    "default_title": "SUPER",
+    "default_popup": "index.html"
+  },
+  "content_scripts": [{
+    "js": ["./src/scripts/content.js"],
+    "matches": ["http://*/*", "https://*/*"],
+    "run_at": "document_start"
+  }],
+  "externally_connectable": {
+    "web_acessible_resources": ["./src/scripts/injectScript.js", "index.html"],
+    "matches": ["http://*/*", "https://*/*"]
+  },
+  "icons": {
+    "16": "./img/favicon/favicon-16x16.png",
+    "32": "./img/favicon/favicon-32x32.png",
+    "48": "./img/favicon/favicon.ico",
+    "128": "./img/favicon/mstile-70x70.png"
+  },
+  "web_accessible_resources": [
+    "*.js",
+    "*.css"
+  ],
+  "content_security_policy": "script-src 'self' blob: 'unsafe-eval' 'wasm-eval'; object-src 'self'"
 }

@@ -23,7 +23,8 @@ export const addToAccount = async (key, value) => {
   
     const object = await store.get(1);
     if (object == undefined) {
-        const obj = {key, value}
+        const obj = {}
+        obj[key] = value;
         const en = window.CryptoJS.AES.encrypt(JSON.stringify(obj), klu4).toString();
         await store.add({ 'account': en });
       } else {

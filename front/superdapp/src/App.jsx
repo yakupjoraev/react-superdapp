@@ -36,15 +36,16 @@ function App() {
   if(screen.current == 2) return <div><StepTwo/></div>
   if(screen.current == 3) return <div><StepThree/></div>
   if(screen.current == '3out') return <div><StepThreeOut/></div>
+  if(screen.current == 'import') return <div><StepThreeImportWallet/></div>
   if(screen.current == 4) return <div><StepFour/></div>
   if(screen.current == 5) return <div><StepFive/></div>
+  if(screen.current == 6) return <div><StepSix/></div>
+  if(screen.current == 7) return <div><StepSeven/></div>
   if(screen.current == 8) return <div><StepEigth/></div>
   if(screen.current == 9) return <div><StepNine/></div>
     //8 - staking and pools
     // 9 - otpravka
     // 13 -dashboard
-  if(screen.current == 6) return <div><StepSix/></div>
-  if(screen.current == 7) return <div><StepSeven/></div>
   if(screen.current == 10) return <div><StepTen/></div>
   if(screen.current == 11) return <div><StepEleven/></div>
   if(screen.current == 12) return <div><StepTwelve/></div>
@@ -62,7 +63,6 @@ function App() {
   if(screen.current == 23) return <div><StepTwentyThree/></div>
 
   //Import wallet = не знаю куда
-  if(screen.current == 24) return <div><StepThreeImportWallet/></div>
 
   //////////////
   return (
