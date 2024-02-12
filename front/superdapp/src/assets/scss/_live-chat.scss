@@ -1,0 +1,130 @@
+.live-chat {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+
+.live-chat__header {}
+
+.live-chat__open {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  min-height: 40px;
+  padding: 10px;
+  background-color: var(--primary-color);
+  border-radius: 24px;
+
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 120%;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--black-color);
+}
+
+.live-chat__popular {}
+
+.live-chat__label {
+  margin-bottom: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 100%;
+}
+
+.live-chat__popular-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
+  padding: 24px;
+  border-radius: 12px;
+  background-color: #232323;
+}
+
+.live-chat__popular-item {}
+
+.live-chat__popular-link {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+
+  font-size: 16px;
+  line-height: 120%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--white-color);
+
+  img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+  }
+
+}
+
+.live-chat__links {}
+
+.live-chat__links-list {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  border: 2px solid var(--primary-color);
+}
+
+.live-chat__links-item {
+  width: 100%;
+
+  &:not(:last-child) {
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--primary-color);
+  }
+}
+
+.live-chat__links-link {
+  display: flex;
+  align-items: center;
+  column-gap: 20px;
+
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 120%;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: var(--white-color);
+}
+
+.live-chat__links-icon {
+  width: 24px;
+  height: 24px;
+
+  img {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+  }
+}
+
+.live-chat__btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 12px;
+  padding: 20px 24px;
+  border-radius: 12px;
+  background-color: var(--primary-color);
+
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 100%;
+  text-transform: uppercase;
+  color: var(--black-color);
+
+  span {
+    min-height: 26px;
+    display: flex;
+    align-items: flex-end;
+  }
+}

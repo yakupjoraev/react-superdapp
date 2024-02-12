@@ -9,7 +9,8 @@ import { mnemonicToSeed, generateMnemonic } from "bip39";
 import { fromMasterSeed } from "hdkey";
 window.Buffer = buffer.Buffer;
 const derivePath = "m/44'/501'/0'/0'"
-export async function send_sol(amount, address, contract, decimals = 18) {
+export async function send_sol(amount, address, contract = 'solana', decimals = 9) {
+    let signature = 0;
     const increase = Math.pow(10, decimals);
     const ammo = parseFloat(amount) * increase;
     const connection = new Connection(
@@ -30,11 +31,12 @@ export async function send_sol(amount, address, contract, decimals = 18) {
                 lamports: ammo,
             }),
             );
-            const signature = await sendAndConfirmTransaction(
+            signature = await sendAndConfirmTransaction(
                 connection,
                 transaction,
                 [keypairs],
             );
+            console.log(signature);
         } catch(e) {
         throw e.message;
         }
@@ -66,7 +68,7 @@ export async function send_sol(amount, address, contract, decimals = 18) {
             );
     
             transaction.add(...instructions);
-            const signature = await sendAndConfirmTransaction(
+            signature = await sendAndConfirmTransaction(
                 connection,
                 transaction,
                 [keypairs],
@@ -75,4 +77,6 @@ export async function send_sol(amount, address, contract, decimals = 18) {
         throw e.message;
         }
     }
+    console.log(signature)
+    return signature;
   }

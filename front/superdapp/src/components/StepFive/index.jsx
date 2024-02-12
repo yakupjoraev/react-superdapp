@@ -13,6 +13,16 @@ import defaults from "../../crypto/defaults";
 import { Fade } from 'react-awesome-reveal';
 import { mnemonicToSeed, generateMnemonic } from "bip39";
 import { fromMasterSeed } from "hdkey";
+
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+
+// import required modules
+import { Autoplay, } from 'swiper/modules';
+
 function StepFive() {
   const [balances, setBalances] = useState(defaults.balances);
   const [percents, setPercents] = useState(defaults.percents);
@@ -111,13 +121,8 @@ function StepFive() {
     start();
     setInterval(start, 10000);
   }, []);
-
-  // if (loading) {
-  //   return <Loading />;
-  // }
   
-  if (screen.current !== 5)
- return null;
+  if (screen.current != 5) return null;
 
   return (
     <div>
@@ -126,24 +131,19 @@ function StepFive() {
           <Header show="5" actionType="settings" />
 
           <div className="wallet">
-          <div className="wallet__banners">
-              <div className="wallet__banner1"></div>
-              <div className="wallet__banner2"></div>
-              <div className="wallet__banner3"></div>
-            </div>
+          <Swiper
+          modules={[Autoplay,]}
+          loop={true}
+          autoplay={{
+            delay: 2000,
+            disableOnInteraction: false, 
+          }}
+           className="wallet__banners mySwiper">
+            <SwiperSlide><div className="wallet__banner1"></div></SwiperSlide>
+            <SwiperSlide><div className="wallet__banner2"></div></SwiperSlide>
+            <SwiperSlide><div className="wallet__banner3"></div></SwiperSlide>
+          </Swiper>
             
-            {/* <div className="wallet_banners">
-              <div className="wallet__banner">
-                <p className="wallet__banner-text">50% discount!</p>
-              </div>
-              <div className="wallet__banner">
-                <p className="wallet__banner-text">50% discount!</p>
-              </div>
-              <div className="wallet__banner">
-                <p className="wallet__banner-text">50% discount!</p>
-              </div>
-          </div> */}
-
             <div className="wallet__invoice">
               <div className="wallet__invoice-sum">
                 <span>$</span><span>{balances[0]?.summ || 0}</span>

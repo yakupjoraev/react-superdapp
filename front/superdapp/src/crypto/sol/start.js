@@ -16,7 +16,7 @@ export default async function data_sol() {
     if (delays) {
         const timestamp = delays.data_delay;
         const curr_timestamp = Date.now();
-        if (curr_timestamp - timestamp > (5 * 1000)) {
+        if (curr_timestamp - timestamp > (10 * 1000)) {
             await addToAccount('delays', {data_delay: Date.now(), history_delay: delays.history_delay, lock_delay: delays.data_delay,});
             const connection = new Connection(
                 'https://solana-mainnet.phantom.app/YBPpkkN4g91xDiAnTE9r0RcMkjg0sKUIWvAfoFVJ',

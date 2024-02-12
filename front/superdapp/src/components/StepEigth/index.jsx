@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 import Header from "../Header";
 import Footer from "../Footer";
+import Loading from "../Loading";
 import screen from "../../main";
 import { useEffect, useState } from "react";
 import { Keypair, Connection, clusterApiUrl, LAMPORTS_PER_SOL, SystemProgram, sendAndConfirmTransaction, PublicKey, Transaction } from "@solana/web3.js";
@@ -16,19 +17,30 @@ window.Buffer = buffer.Buffer;
 function StepEigth() {
   const [callData, setCallData] = useState([]);
   const [sol_per, setSolPercent] = useState(0);
+  const [loading, setLoading] = useState(true);
+  async function setToken(token) {
+    const call = callData.find(find => find.ticker === token)
+    await addToAccount('staking_data', call);
+    await load(9);
+  }
   useEffect(() => {
 
     async function start() {
+      setLoading(true);
       const rawData = await axios.get('https://api.xbanking.org/api/v2/assets');
       const calldata = rawData.data;
-      const call = calldata.find(find => find.ticker === 'sol')
-      // setCallData(calldata)
-      await addToAccount('staking_data', call);
-      setSolPercent((call.rates[0].apy * 100).toFixed(2));
+      setCallData(calldata)
+      setLoading(false);
     }
     start()
   }, [])
   if (screen.current != 8) return null;
+  const apr = {};
+  if (callData && callData.length > 0) {
+    callData.forEach(token => {
+      apr[token.ticker] = token.rates[0]?.apy * 100 || 0;
+    });
+  }
   return (
     <div>
     <Fade cascade duration={500}>
@@ -37,6 +49,7 @@ function StepEigth() {
 
       <div className="content">
         <div className="staking">
+        {loading && <Loading />}
           <h1 className="title title--mini">Staking & Pools</h1>
 
           <form action="#" className="staking__form form">
@@ -61,7 +74,8 @@ function StepEigth() {
             </div>
 
             <div onClick={() => {
-              load(9);
+              const token = 'sol'
+              setToken(token);
             }} className="wallet__token">
               <div className="wallet__token-infos">
                 <div className="wallet__token-pic">
@@ -74,7 +88,7 @@ function StepEigth() {
               </div>
 
               <div className="wallet__token-sums">
-                <p className="wallet__token-sum text">{sol_per}% APR</p>
+                <p className="wallet__token-sum text">{apr.sol}% APR</p>
               </div>
             </div>
           </div>

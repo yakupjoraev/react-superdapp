@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Header from "../Header";
 import screen from "../../main";
+import Loading from "../Loading";
 import { useEffect, useState } from "react";
 import { Keypair, Connection, clusterApiUrl, LAMPORTS_PER_SOL, SystemProgram, sendAndConfirmTransaction, PublicKey,
 Transaction } from "@solana/web3.js";
@@ -21,6 +22,7 @@ function StepSix() {
     const [prices, setPrices] = useState(defaults.prices);
     const [currentToken, setToken] = useState({});
     const [tokenName, setTokenName] = useState('SOL')
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
       async function setBalances() {
         const result = await getAccount();
@@ -46,6 +48,7 @@ function StepSix() {
 
     async function sendnow() {
       setSending(true);
+      setLoading(true);
       try {
         const address = document.getElementById("address").value.toString();
         const value = parseFloat(document.getElementById("amount").value.toString());
@@ -57,12 +60,14 @@ function StepSix() {
           if(currentToken.chain == 'solana') {
             await send_sol(value, address, contract, decimals)
           }
+          setLoading(false);
           await load(14)
         } else {
           return;
         }
       } catch(e) {
         setSending(false);
+        setLoading(false);
         console.log(e)
         if(e.includes('public key')) {
           return toast.warn('Invalid address', {
@@ -108,7 +113,7 @@ function StepSix() {
             <h1 className="title title--mini">
               SEND
             </h1>
-
+            {loading && <Loading />}
             <div className="send">
               <form className="send__form form" action="#">
                 <div className="form__groups">

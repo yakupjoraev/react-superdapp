@@ -205,7 +205,7 @@
   align-items: center;
   column-gap: 20px;
   overflow-y: auto;
-  margin-right: -20px;
+  // margin-right: -20px;
   margin-bottom: 20px;
 
   &::-webkit-scrollbar {
@@ -217,7 +217,7 @@
 .wallet__banner1 {
   display: flex;
   align-items: center;
-  min-width: 350px;
+  // min-width: 350px;
   height: 90px;
   padding: 10px 20px;
   border: #161616;

@@ -42,6 +42,7 @@ export default async function history_sol() {
         const keypairs = Keypair.fromSeed(derivedKey._privateKey);
         const transes = await axios.get(`https://api.solana.fm/v0/accounts/${keypairs.publicKey}/transfers?utcFrom=0&utcTo=8223321783287231812&limit=100`)
         const transactions1 = transes.data.results;
+        if(transactions1 == undefined) return [];
         const transactions = transactions1.filter((element) => {
           if (element.data.some(dataElement => dataElement && dataElement.action)) {
             // Проверка условий для фильтрации

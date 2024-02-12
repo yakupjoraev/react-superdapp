@@ -12,7 +12,6 @@ import { getAccount, addToAccount } from "../../systems/storage/store";
 import { Fade, Zoom, Slide, Rotate } from "react-awesome-reveal";
 function StepTen() { 
   const [allTransactions, setTransactions] = useState([]);
-  const [load, setLoad] = useState(false);
   const [loading, setLoading] = useState(true);
 
   function setTx(tr) {
@@ -56,19 +55,19 @@ function StepTen() {
     }
     fetchData();
   }, []);
-  if (screen.current !== 10 || load) return null;
+  if (screen.current !== 10) return null;
   return (
         <div>
         <Fade cascade duration={500}>
   <div className="wrapper">
    <Header actionType="back" />
 
+   {loading && <Loading className="loading--top" />}
+
     <div className="content">
       <h1 className="title title--mini">Recent activity</h1>
 
       <div id="activities" className="activites">
-
-      {loading && <Loading className="loading--top" />}
 
       <div id="activities" className="activities">
       {allTransactions.map((transaction, index) => (

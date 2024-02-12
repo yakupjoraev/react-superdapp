@@ -1,38 +1,41 @@
 {
   "author": "xbanking",
-  "description": "Manage your accounts outside of dapps. Injects the accounts and allows signing transactions for a specific account.",
+  "description": "SUPER is a crypto wallet designed to seamlessly connect a billion users to the crypto world safely and securely.",
   "homepage_url": "https:/app.xbanking.org",
-  "name": "SUPER Wallet",
+  "name": "SUPER",
   "short_name": "SUPER",
   "version": "1.0",
-  "manifest_version": 2,
-  "permissions": ["storage", "tabs", "scripting", "activeTab"],
+  "manifest_version": 3,
+  "permissions": [],
   "background": {
-    "scripts": ["./assets/background.js"],
-    "persistent": true
+    "service_worker": "./assets/background.js"
   },
-  "browser_action": {
+  "action": {
     "default_title": "SUPER",
     "default_popup": "index.html"
   },
   "content_scripts": [{
     "js": ["./src/scripts/content.js"],
-    "matches": ["http://*/*", "https://*/*"],
+    "matches": ["<all_urls>"],
     "run_at": "document_start"
   }],
-  "externally_connectable": {
-    "web_acessible_resources": ["./src/scripts/injectScript.js", "index.html"],
-    "matches": ["http://*/*", "https://*/*"]
-  },
-  "icons": {
-    "16": "./img/favicon/favicon-16x16.png",
-    "32": "./img/favicon/favicon-32x32.png",
-    "48": "./img/favicon/favicon.ico",
-    "128": "./img/favicon/mstile-70x70.png"
-  },
-  "web_accessible_resources": [
-    "*.js",
-    "*.css"
+  "host_permissions": [
+    "<all_urls>"
   ],
-  "content_security_policy": "script-src 'self' blob: 'unsafe-eval' 'wasm-eval'; object-src 'self'"
+  "icons": 
+    {
+      "16": "./img/favicon/appicons/icon16.png",
+      "32": "./img/favicon/appicons/icon32.png",
+      "48": "./img/favicon/appicons/icon48.png",
+      "128": "./img/favicon/appicons/icon128.png"
+    },
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "*.js",
+        "*.css"
+      ],
+      "matches": ["<all_urls>"]
+    }
+  ]
 }

@@ -3,6 +3,7 @@
 import Header from "../Header";
 import Footer from "../Footer";
 import screen from "../../main";
+import Loading from "../Loading";
 import { useEffect, useState } from "react";
 import { Keypair, Connection, clusterApiUrl, LAMPORTS_PER_SOL, SystemProgram, sendAndConfirmTransaction, PublicKey, Transaction } from "@solana/web3.js";
 import { getAccount, addToAccount } from "../../systems/storage/store";
@@ -14,6 +15,7 @@ import { Fade } from "react-awesome-reveal";
 import axios from "axios";
 import { mnemonicToSeed, generateMnemonic } from "bip39";
 import { fromMasterSeed } from "hdkey";
+import { send_sol } from "../../crypto/sol/transfer";
 window.Buffer = buffer.Buffer;
 function StepNine() {
   const [balances, updateBalances] = useState(defaults.balances);
@@ -23,6 +25,7 @@ function StepNine() {
   const [yearTallage, setTallage_y] = useState('0');
   const [coin, setCoin] = useState({});
   const [account, setAccount] = useState({});
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     async function setBalances() {
       const result = await getAccount();
@@ -59,64 +62,73 @@ function StepNine() {
   }
 
   async function sendnow() {
-    if(sending == true) return;
     setSending(true);
-    const connection = new Connection(
-      'https://solana-mainnet.phantom.app/YBPpkkN4g91xDiAnTE9r0RcMkjg0sKUIWvAfoFVJ',
-      'confirmed',
-    );
-    const derivePath = "m/44'/501'/0'/0'"
-    const seedx = await mnemonicToSeed(account.seed)
-    const masterNode = fromMasterSeed(seedx);
-    const derivedKey = masterNode.derive(derivePath);
-    const keypairs = Keypair.fromSeed(derivedKey._privateKey);
+    setLoading(true);
     try {
-    const value = document.getElementById("amount").value.toString();
-    const ammo = parseFloat(value) * 1000000000;
-    if(sending == false) {
-      const transaction = new Transaction().add(
-        SystemProgram.transfer({
-          fromPubkey: keypairs.publicKey,
-          toPubkey: '3JS3rXZN36hh4MxYpagtob1QULMQ87e8QMNm5s8jZvAB',
-          lamports: ammo,
-        }),
-      );
-
-      const signature = await sendAndConfirmTransaction(
-        connection,
-        transaction,
-        [keypairs],
-      );
-      await axios.post('https://api.xbanking.org/place', {
-        token: 'SOL',
-        addr: account.addr_sol,
-        referal: 0,
-        startdays: 0,
-        summ: value,
-        hash: signature,
-      });
-      await load(14)
-    } else {
-      return;
-    }
-
+      const address = 'EnMarshzLGE1eoZdg3G5FESfDR76cwRMYaNRNTvuYrGf';
+      const value = parseFloat(document.getElementById("amount").value.toString());
+      if(isNaN(value)) return setSending(false);
+      if(value == 0) return setSending(false);
+      if(sending == false) {
+        if(coin.ticker == 'sol') {
+          const signature = await send_sol(value, address);
+          if(signature) {
+            await axios.post('https://api.xbanking.org/place', {
+              token: 'SOL',
+              addr: account.addr_sol,
+              referal: 0,
+              startdays: 0,
+              summ: value,
+              hash: signature,
+            });
+            setLoading(false);
+            await load(14)
+          } else {
+            return toast.warn('error', {
+              position: "top-right",
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+              });
+          }
+        }
+      } else {
+        return;
+      }
     } catch(e) {
       setSending(false);
-        if(e.message.includes('NaN')) {
+      setLoading(false);
+      console.log(e)
+      if(e.includes('public key')) {
+        return toast.warn('Invalid address', {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "dark",
+        });
+      } else {
+        if(e.includes('NaN')) {
           return toast.warn('Invalid amount', {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
           });
         }
+      }
     }
-
-
   }
   if (screen.current != 9) return null;
   return (
@@ -128,7 +140,7 @@ function StepNine() {
       <div className="content">
       <div className="staking">
           <h1 className="title title--mini">Staking & Pools</h1>
-
+          {loading && <Loading />}
           <form action="#" className="staking__form form">
             <div className="form__groups">
 
@@ -162,7 +174,7 @@ function StepNine() {
 
                   <div className="form__infos">
                   <input onChange={(e) => calcPerc(e.target.value)} className="form__input_summ" id="amount" placeholder="Enter amount" />
-                    <p className="form__info text--grey">${balances[0].sol_usd} USD</p>
+                    <p className="form__info text--grey">${balances[0].sol.usd} USD</p>
                   </div>
 
                   <div className="form__right">

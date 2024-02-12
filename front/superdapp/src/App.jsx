@@ -27,6 +27,8 @@ import StepTwenty from './components/StepTwenty'
 import StepTwentyOne from './components/StepTwentyOne'
 import StepTwentyTwo from './components/StepTwentyTwo'
 import StepTwentyThree from './components/StepTwentyThree'
+import StepTwentyFour from './components/StepTwentyFour'
+import StepTwentyFive from './components/StepTwentyFive'
 import LockScreen from './components/LockScreen'
 import screen from './main'
 
@@ -61,6 +63,8 @@ function App() {
   if(screen.current == 21) return <div><StepTwentyOne/></div>
   if(screen.current == 22) return <div><StepTwentyTwo/></div>
   if(screen.current == 23) return <div><StepTwentyThree/></div>
+  if(screen.current == 24) return <div><StepTwentyFour/></div>
+  if(screen.current == 25) return <div><StepTwentyFive/></div>
 
   //Import wallet = не знаю куда
 
@@ -91,6 +95,8 @@ function App() {
       <StepTwentyOne/>
       <StepTwentyTwo/>
       <StepTwentyThree/>
+      <StepTwentyFour/>
+      <StepTwentyFive/>
     </div>
 
   )

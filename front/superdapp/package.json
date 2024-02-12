@@ -42,6 +42,7 @@
     "react-awesome-reveal": "^4.2.7",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
+    "react-id-swiper": "^4.0.0",
     "react-manifest": "^1.0.5",
     "react-native-bip39": "^2.3.0",
     "react-qr-code": "^2.0.12",
@@ -51,6 +52,7 @@
     "react-transition-group": "^4.4.5",
     "redux-persist": "^6.0.0",
     "sass": "^1.69.6",
+    "swiper": "^11.0.6",
     "vite-plugin-manifest-sri": "^0.2.0",
     "vite-plugin-node-stdlib-browser": "^0.2.1",
     "web-bip39": "^0.0.3"
