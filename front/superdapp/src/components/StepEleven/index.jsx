@@ -10,6 +10,7 @@ import { getAccount, addToAccount } from "../../systems/storage/store";
 import { Fade, Zoom, Slide } from "react-awesome-reveal";
 
 function StepEleven() {
+  const smena = parseInt(localStorage.frs);
   if (screen.current != 11) return null;
   const tx = JSON.parse(localStorage.currentTx)
   const prof = tx.source;
@@ -29,7 +30,7 @@ function StepEleven() {
               <img src="./img/solana.svg" width="35" height="57" alt="solana" />
             </div>
 
-            <p className="info-pay__currency-text yellow">+{tx.summ} SOL</p>
+            <p className="info-pay__currency-text yellow">+{tx.summ} {tx.token_name.toUpperCase()}</p>
           </div>
 
           <div className="info-pay__info">
@@ -54,14 +55,14 @@ function StepEleven() {
             </div>
 
             <div className="info-pay__row info-pay__row--center">
-              <a href={`https://solscan.io/tx/${tx.tx}?cluster=testnet`} className="info-pay__info-link">View on Explorer</a>
+              <a href={`https://solscan.io/tx/${tx.tx}`} target="_blank" className="info-pay__info-link" rel="noreferrer">View on Explorer</a>
             </div>
           </div>
 
         </div>
       </div>
 
-      <a onClick={() => load(10)} className="btn btn--footer" href="#">BACK</a>
+      <a onClick={() => load(smena)} className="btn btn--footer" href="#">BACK</a>
     </div>
   )
 }

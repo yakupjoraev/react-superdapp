@@ -91,6 +91,78 @@ function StepEigth() {
                 <p className="wallet__token-sum text">{apr.sol}% APR</p>
               </div>
             </div>
+            <div onClick={() => {
+              const token = 'jto'
+              setToken(token);
+            }} className="wallet__token">
+              <div className="wallet__token-infos">
+                <div className="wallet__token-pic">
+                  <img src="./img/coins/jto.png" width="24" height="24" alt="SOL" />
+                </div>
+
+                <div className="wallet__token-info">
+                  <p className="wallet__token-name text">JTO</p>
+                </div>
+              </div>
+
+              <div className="wallet__token-sums">
+                <p className="wallet__token-sum text">{apr.jto}% APR</p>
+              </div>
+            </div>
+            <div onClick={() => {
+              const token = 'ray'
+              setToken(token);
+            }} className="wallet__token">
+              <div className="wallet__token-infos">
+                <div className="wallet__token-pic">
+                  <img src="./img/coins/ray.png" width="24" height="24" alt="SOL" />
+                </div>
+
+                <div className="wallet__token-info">
+                  <p className="wallet__token-name text">RAY</p>
+                </div>
+              </div>
+
+              <div className="wallet__token-sums">
+                <p className="wallet__token-sum text">{apr.ray}% APR</p>
+              </div>
+            </div>
+            <div onClick={() => {
+              const token = 'jup'
+              setToken(token);
+            }} className="wallet__token">
+              <div className="wallet__token-infos">
+                <div className="wallet__token-pic">
+                  <img src="./img/coins/jup.png" width="24" height="24" alt="SOL" />
+                </div>
+
+                <div className="wallet__token-info">
+                  <p className="wallet__token-name text">JUP</p>
+                </div>
+              </div>
+
+              <div className="wallet__token-sums">
+                <p className="wallet__token-sum text">{apr.jup}% APR</p>
+              </div>
+            </div>
+            <div onClick={() => {
+              const token = 'pyth'
+              setToken(token);
+            }} className="wallet__token">
+              <div className="wallet__token-infos">
+                <div className="wallet__token-pic">
+                  <img src="./img/coins/pyth.png" width="24" height="24" alt="SOL" />
+                </div>
+
+                <div className="wallet__token-info">
+                  <p className="wallet__token-name text">PYTH</p>
+                </div>
+              </div>
+
+              <div className="wallet__token-sums">
+                <p className="wallet__token-sum text">{apr.pyth}% APR</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

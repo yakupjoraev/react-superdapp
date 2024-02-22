@@ -9,20 +9,35 @@ import { getAccount, addToAccount } from "../../systems/storage/store";
 import * as buffer from "buffer";
 import load from "../../functions/loader";
 import { ToastContainer, toast } from 'react-toastify';
-import defaults from "../../crypto/defaults";
+import defaults, {truncateNumberDefault} from "../../crypto/defaults";
 import { Fade } from "react-awesome-reveal";
 import { send_sol } from "../../crypto/sol/transfer";
 window.Buffer = buffer.Buffer;
 function StepSix() {
 
-    const [isFormTokensActive, setFormTokensActive] = useState(false);
-    const [balances, updateBalances] = useState(defaults.balances);
-    const [sending, setSending] = useState(false);
-    const [percents, setPercents] = useState(defaults.percents);
-    const [prices, setPrices] = useState(defaults.prices);
-    const [currentToken, setToken] = useState({});
-    const [tokenName, setTokenName] = useState('SOL')
-    const [loading, setLoading] = useState(false);
+  const [isFormTokensActive, setFormTokensActive] = useState(false);
+  const [balances, updateBalances] = useState(defaults.balances);
+  const [sending, setSending] = useState(false);
+  const [percents, setPercents] = useState(defaults.percents);
+  const [tokenBalance_usd, updateTokenBalance_usd] = useState(0);
+  const [prices, setPrices] = useState(defaults.prices);
+  const [currentToken, setToken] = useState({});
+  const [tokenName, setTokenName] = useState('sol')
+  const [loading, setLoading] = useState(false);
+
+    
+  function calcPerc(inp) {
+    const inputsumm = parseFloat(inp);
+    if (inp == '' || inp == ' ' || inputsumm <= 0 || isNaN(inp) || inp == 'NaN') {
+      updateTokenBalance_usd(truncateNumberDefault(prices[0]?.[tokenName]?.usd))
+      setSending(true);
+      return;
+    }
+    setSending(false);
+    updateTokenBalance_usd(truncateNumberDefault(inputsumm * prices[0]?.[tokenName]?.usd))
+  }
+
+
     useEffect(() => {
       async function setBalances() {
         const result = await getAccount();
@@ -30,9 +45,20 @@ function StepSix() {
         setPrices(result.prices);
         setPercents(result.percents);
         setToken(result.balances[0].sol);
+        setTokenName('sol')
       }
       setBalances()
     }, [])
+
+    function setmax() {
+      const inputel = document.getElementById('amount');
+      const tokenobj = balances[0][tokenName.toLowerCase()];
+      if(tokenobj.contract != 'solana') {
+        inputel.value = parseFloat(tokenobj.balance);
+      } else {
+        inputel.value = parseFloat(tokenobj.balance - 0.000005);
+      }
+    }
 
     const handleCallFormTokensClick = () => {
       setFormTokensActive(true);
@@ -42,7 +68,7 @@ function StepSix() {
     };
     const handleWalletTokenClick = (tokenName, tokenData) => {
       setFormTokensActive(false);
-      setTokenName(tokenName.toUpperCase());
+      setTokenName(tokenName);
       setToken(tokenData);
     };
 
@@ -54,8 +80,16 @@ function StepSix() {
         const value = parseFloat(document.getElementById("amount").value.toString());
         const contract = currentToken.contract;
         const decimals = currentToken.decimals;
-        if(isNaN(value)) return setSending(false);
-        if(value == 0) return setSending(false);
+        if(isNaN(value)) {
+          setSending(false);
+          setLoading(false);
+          return;
+        }
+        if(value == 0) {
+          setSending(false);
+          setLoading(false);
+          return;
+        }
         if(sending == false) {
           if(currentToken.chain == 'solana') {
             await send_sol(value, address, contract, decimals)
@@ -68,7 +102,7 @@ function StepSix() {
       } catch(e) {
         setSending(false);
         setLoading(false);
-        console.log(e)
+        console.error(e)
         if(e.includes('public key')) {
           return toast.warn('Invalid address', {
           position: "top-right",
@@ -135,8 +169,8 @@ function StepSix() {
                       </div>
 
                       <div className="form__infos">
-                        <p className="form__info text">{tokenName}</p>
-                        <p className="form__info text--grey">Balance: {currentToken.balance} {tokenName}</p>
+                        <p className="form__info text">{tokenName.toUpperCase()}</p>
+                        <p className="form__info text--grey">Balance: {currentToken.balance} {tokenName.toUpperCase()}</p>
                       </div>
 
                       <div className="form__right">
@@ -161,10 +195,10 @@ function StepSix() {
                         <div className="wallet__token-info">
                           <p className="wallet__token-name text">{tokenName.toUpperCase()}</p>
                           <div className="wallet__token-bottom">
-                            <div className="wallet__token-count text--grey">${prices[0]?.[tokenName]?.usd || 0}</div>
+                            <div className="wallet__token-count text--grey">${truncateNumberDefault(prices[0]?.[tokenName]?.usd) || 0}</div>
                             {percents[0] && percents[0][tokenName] !== undefined && (
                               <div className="wallet__token-percent yellow">
-                                {percents[0][tokenName].percent}%
+                                {truncateNumberDefault(percents[0][tokenName].percent)}%
                                 <img className="wallet__token-arrow" src={`./img/icons/percent-${percents[0][tokenName].percent < 0 ? 'down' : 'up'}.svg`} alt="" />
                               </div>
                             )}
@@ -172,8 +206,8 @@ function StepSix() {
                         </div>
                       </div>
                       <div className="wallet__token-sums">
-                        <p className="wallet__token-sum text">{tokenData.balance}</p>
-                        <p className="wallet__token-sum text--grey">${tokenData.usd || 0}</p>
+                        <p className="wallet__token-sum text">{truncateNumberDefault(tokenData.balance)}</p>
+                        <p className="wallet__token-sum text--grey">${truncateNumberDefault(tokenData.usd) || 0}</p>
                       </div>
                     </div>
                   )
@@ -213,12 +247,12 @@ function StepSix() {
                       </div>
 
                       <div className="form__infos">
-                        <input className="form__input_summ" id="amount" placeholder="Enter amount" />
-                        <p className="form__info text--grey">${currentToken.usd} USD</p>
+                        <input onChange={(e) => calcPerc(e.target.value)} className="form__input_summ" id="amount" placeholder="Enter amount" />
+                        <p className="form__info text--grey">${tokenBalance_usd} USD</p>
                       </div>
 
                       <div className="form__right">
-                        <p className="form__right-text text--grey">MAX</p>
+                        <p onClick={setmax} id="max" className="form__right-text text--grey">MAX</p>
                       </div>
                     </div>
 

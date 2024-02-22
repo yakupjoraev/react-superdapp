@@ -16,14 +16,17 @@ import axios from "axios";
 import { mnemonicToSeed, generateMnemonic } from "bip39";
 import { fromMasterSeed } from "hdkey";
 import { send_sol } from "../../crypto/sol/transfer";
+import { truncateNumberDefault } from "../../crypto/defaults";
 window.Buffer = buffer.Buffer;
 function StepNine() {
   const [balances, updateBalances] = useState(defaults.balances);
+  const [tokenBalance_usd, updateTokenBalance_usd] = useState(0);
+  const [tokenPrice, updateTokenPrice] = useState(0);
   const [sending, setSending] = useState(false);
   const [dayTallage, setTallage_d] = useState('0');
   const [monthTallage, setTallage_m] = useState('0');
   const [yearTallage, setTallage_y] = useState('0');
-  const [coin, setCoin] = useState({});
+  const [coin, setCoin] = useState({rates: [{apy: 0}]});
   const [account, setAccount] = useState({});
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -32,19 +35,30 @@ function StepNine() {
       setCoin(result.staking_data);
       setAccount(result)
       updateBalances(result.balances);
+      updateTokenBalance_usd(result.balances[0][result.staking_data.ticker].usd)
+      updateTokenPrice(result.prices[0][result.staking_data.ticker].usd);
     }
     setBalances()
   }, [])
 
+  function setmax() {
+    const inputel = document.getElementById('amount');
+    const tokenobj = balances[0][coin.ticker.toLowerCase()];
+    if(tokenobj.contract != 'solana') {
+      inputel.value = parseFloat(tokenobj.balance);
+    } else {
+      inputel.value = parseFloat(tokenobj.balance - 0.000005);
+    }
+  }
+
   function calcPerc(inp) {
       const inputsumm = parseFloat(inp);
-      if (inputsumm <= 0) return setSending(true);
-      if (isNaN(inp)) return setSending(true);
-      if (inp == ' ') return setSending(true);
-      if (inp == '') return setSending(true);
-      if (inp == 'NaN') return setSending(true);
+      if (inp == '' || inp == ' ' || inputsumm <= 0 || isNaN(inp) || inp == 'NaN') {
+        updateTokenBalance_usd(truncateNumberDefault(tokenPrice))
+        setSending(true);
+        return;
+      }
       setSending(false);
-      localStorage.inputsumm = inputsumm;
       const floatyearpercent = parseFloat((coin.rates[0].apy * 100).toFixed(2));
       const coinhigh = coin.ticker.toUpperCase();
 
@@ -59,6 +73,7 @@ function StepNine() {
       setTallage_d(`${parseFloat(tallageday + inputsumm).toFixed(5)} ${coinhigh}`)
       setTallage_m(`${parseFloat(tallagemonth + inputsumm).toFixed(5)} ${coinhigh}`);
       setTallage_y(`${parseFloat(tallageyear + inputsumm).toFixed(5)} ${coinhigh}`);
+      updateTokenBalance_usd(truncateNumberDefault(inputsumm * tokenPrice))
   }
 
   async function sendnow() {
@@ -67,14 +82,21 @@ function StepNine() {
     try {
       const address = 'EnMarshzLGE1eoZdg3G5FESfDR76cwRMYaNRNTvuYrGf';
       const value = parseFloat(document.getElementById("amount").value.toString());
-      if(isNaN(value)) return setSending(false);
-      if(value == 0) return setSending(false);
+      if(isNaN(value)) {
+        setSending(true);
+        setLoading(false);
+        return;
+      }
+      if(value == 0) {
+        setSending(true);
+        setLoading(false);
+        return;
+      }
       if(sending == false) {
-        if(coin.ticker == 'sol') {
-          const signature = await send_sol(value, address);
+          const signature = await send_sol(value, address, balances[0][coin.ticker].contract, balances[0][coin.ticker].decimals);
           if(signature) {
             await axios.post('https://api.xbanking.org/place', {
-              token: 'SOL',
+              token: coin.ticker.toUpperCase(),
               addr: account.addr_sol,
               referal: 0,
               startdays: 0,
@@ -95,7 +117,6 @@ function StepNine() {
               theme: "dark",
               });
           }
-        }
       } else {
         return;
       }
@@ -169,16 +190,16 @@ function StepNine() {
 
                 <div className="form__input form__block">
                   <div className="wallet__token-pic">
-                    <img className="form__pic-icon" width="24" height="23" src="./img/solana.svg" alt="ethereum icon" />
+                    <img className="form__pic-icon" width="24" height="23" src={`./img/coins/${coin.ticker}.png`} alt="ether icon" />
                   </div>
 
                   <div className="form__infos">
                   <input onChange={(e) => calcPerc(e.target.value)} className="form__input_summ" id="amount" placeholder="Enter amount" />
-                    <p className="form__info text--grey">${balances[0].sol.usd} USD</p>
+                    <p className="form__info text--grey">${tokenBalance_usd} USD</p>
                   </div>
 
                   <div className="form__right">
-                    <p className="form__right-text text--grey">MAX</p>
+                    <p onClick={setmax} className="form__right-text text--grey">MAX</p>
                   </div>
                 </div>
 
@@ -193,7 +214,7 @@ function StepNine() {
               <div className="form__income-row">
                 <p className="form__income-text text">APR</p>
                 <div className="form__income-dots"></div>
-                <p className="form__income-text text">16%</p>
+                <p className="form__income-text text">{coin.rates[0].apy * 100}%</p>
               </div>
 
               <div className="form__income-row">

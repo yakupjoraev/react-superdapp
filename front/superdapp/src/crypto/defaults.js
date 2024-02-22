@@ -23,6 +23,13 @@ const transaction = {
 
 const token = 'sol'
 
+
 const defaults = { balances, percents, token, prices, transaction }
 
 export default defaults;
+
+export function truncateNumberDefault(numb, n = 4) { // 4
+    const num = parseFloat(numb);
+    const factor = Math.pow(10, n);
+    return Math.floor(num * factor) / factor;
+  }

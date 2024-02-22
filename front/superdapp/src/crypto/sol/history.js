@@ -5,18 +5,31 @@ import BigNumber from 'bignumber';
 import axios from "axios";
 import { mnemonicToSeed, generateMnemonic } from "bip39";
 import { fromMasterSeed } from "hdkey";
+const tokenCache = {};
+
 export async function getToken(token_addr) {
-  const add = JSON.stringify(token_addr);
+  if (tokenCache[token_addr]) {
+    return tokenCache[token_addr];
+  }
   try {
-    const tok_curr = await axios.get(`https://api.solana.fm/v1/tokens/${token_addr}`);
-    return tok_curr;
-  } catch(e) {
-    if (e.response && e.response.status === 404) {
-      console.error(`Токен не найден для адреса: ${token_addr}`);
-      // Возвращаем null или другое значение по умолчанию
-      return null;
+    const response = await axios.get(`https://api.solana.fm/v1/tokens/${token_addr}`);
+    
+    let price_usd = null;
+
+    try {
+      const price = await axios.get(`https://api.geckoterminal.com/api/v2/networks/solana/tokens/${token_addr}`);
+      price_usd = price.data.data.attributes.price_usd;
+    } catch (error) {
+      console.error('Ошибка при получении цены:', error);
     }
-    console.error('Ошибка при запросе токена:', e);
+
+    if (price_usd != null) {
+      response.data.price_usd = price_usd;
+    }
+    tokenCache[token_addr] = response.data;
+    return response.data;
+  } catch (error) {
+    console.error('Ошибка при получении данных токена:', error);
     return null;
   }
 }
@@ -40,20 +53,22 @@ export default async function history_sol() {
         const masterNode = fromMasterSeed(seedx);
         const derivedKey = masterNode.derive(derivePath);
         const keypairs = Keypair.fromSeed(derivedKey._privateKey);
-        const transes = await axios.get(`https://api.solana.fm/v0/accounts/${keypairs.publicKey}/transfers?utcFrom=0&utcTo=8223321783287231812&limit=100`)
+        const transes = await axios.get(`https://api.solana.fm/v0/accounts/${keypairs.publicKey}/transfers?utcFrom=0&utcTo=8223321783287231812&limit=100`);
         const transactions1 = transes.data.results;
         if(transactions1 == undefined) return [];
         const transactions = transactions1.filter((element) => {
           if (element.data.some(dataElement => dataElement && dataElement.action)) {
-            // Проверка условий для фильтрации
-            const isFilteredTransaction = element.data.every(dataElement =>
-              dataElement.action !== 'mintToCollectionV1'
-            );
-            
+            const isFilteredTransaction = element.data.every(dataElement => {
+              // Проверяем, что действие не 'mintToCollectionV1'
+              const actionCheck = dataElement.action !== 'mintToCollectionV1';
+        
+              // Если token пуст, проверяем amount > 1, иначе условие игнорируется (считаем true)
+              const amountCheck = dataElement.token === "" ? dataElement.amount > 1 : true;
+        
+              return actionCheck && amountCheck;
+            });
             return isFilteredTransaction;
           }
-          
-          // Если не хватает необходимых полей, считаем транзакцию невалидной
           return false;
         });
         for(let i = 0; i < transactions.length; i ++) {
@@ -85,8 +100,8 @@ export default async function history_sol() {
           if (token_addr !== 'So11111111111111111111111111111111111111112' || token_addr !== '') {
             const tok_curr = await getToken(token_addr);
             // Check if tok_curr is not null before accessing properties
-            if (tok_curr && tok_curr.data) {
-              const dat = tok_curr.data;
+            if (tok_curr) {
+              const dat = tok_curr
               if (dat.tokenMetadata.offChainInfo == null & dat.tokenList.image == null) {
                 token_png = `./img/solana.svg`;
               } else {
@@ -111,6 +126,7 @@ export default async function history_sol() {
           const data = d.getDate() + '/' + (d.getMonth()+1) + '/' + d.getFullYear();
           const source = transactionData.source
           const summa = parseFloat(lamports) / decimals
+          
           const newTransaction = {
             id: i,
             date: data,
@@ -121,6 +137,7 @@ export default async function history_sol() {
             type,
             token_name,
             token_png,
+            token_addr
           };
           if(lamports) {
             transactions_in_sol.push(newTransaction)

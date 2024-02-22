@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 import Header from "../Header";
 import screen from "../../main";
-import { useEffect, useState } from "react";
+import { useEffect, useState } from "react"; 
 import { Keypair, Connection, clusterApiUrl, LAMPORTS_PER_SOL, SystemProgram, sendAndConfirmTransaction, PublicKey, Transaction } from "@solana/web3.js";
 import { getAccount, addToAccount } from "../../systems/storage/store";
 import * as buffer from "buffer";
@@ -22,8 +22,8 @@ function StepSeven() {
   }, [])
   if (screen.current != 7) return null;
   const prof = address_sol;
-  const resultf = prof.match(/^.{5}/g)
-  const rr = prof.match(/.{4}(?=($|\r|\n))/g);
+  const resultf = prof.match(/^.{10}/g)
+  const rr = prof.match(/.{14}(?=($|\r|\n))/g);
   const srs = `${resultf}...${rr}`;
   
   return (

@@ -36,7 +36,6 @@ export async function send_sol(amount, address, contract = 'solana', decimals = 
                 transaction,
                 [keypairs],
             );
-            console.log(signature);
         } catch(e) {
         throw e.message;
         }
@@ -47,11 +46,9 @@ export async function send_sol(amount, address, contract = 'solana', decimals = 
               contract
             );
             const account = await connection.getTokenAccountsByOwner(keypairs.publicKey, { mint: mintPublicKey});
-          
             const accountPublicKeyTokenWallet = account.value[0].pubkey.toString();
 
             const accountDestination = await connection.getTokenAccountsByOwner(destPublicKey, { mint: mintPublicKey});
-          
             const accountDestinationPublicKeyTokenWallet = accountDestination.value[0].pubkey.toString();
 
             const transaction = new Transaction();
@@ -74,9 +71,9 @@ export async function send_sol(amount, address, contract = 'solana', decimals = 
                 [keypairs],
             );
         } catch(e) {
+            console.log(e)
         throw e.message;
         }
     }
-    console.log(signature)
     return signature;
   }

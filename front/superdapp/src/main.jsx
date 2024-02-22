@@ -26,8 +26,8 @@ if(localStorage.screen) {
 }
 
 async function start() {
-    //     screen.current = 25;
-    // localStorage.screen = JSON.stringify(screen);
+        screen.current = 26;
+    localStorage.screen = JSON.stringify(screen);
     const currentUrl = new URL(window.location.href);
     const searchParams = currentUrl.searchParams;
     const actionValue = searchParams.get('action');

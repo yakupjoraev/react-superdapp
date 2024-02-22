@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="Layer_1" x="0px" y="0px" viewBox="0 0 2500 2500" style="enable-background:new 0 0 2500 2500;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;fill:url(#SVGID_1_);}
+</style>
+<g id="Layer_x0020_1">
+	<g id="_1705576907152">
+		<path class="st0" d="M1250,0c690,0,1250,560,1250,1250s-560,1250-1250,1250S0,1940,0,1250S560,0,1250,0z"></path>
+		
+			<linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="546" y1="1248.3899" x2="1954" y2="1248.3899" gradientTransform="matrix(1 0 0 -1 0 2497.8899)">
+			<stop offset="0" style="stop-color:#00CCFF"></stop>
+			<stop offset="1" style="stop-color:#33FF99"></stop>
+		</linearGradient>
+		<path class="st1" d="M960,859l357,361l637-778L960,859z M546,2057l1128-475l-357-362L546,2057z"></path>
+	</g>
+</g>
+</svg>

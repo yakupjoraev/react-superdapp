@@ -99,7 +99,7 @@ theme="dark"
             </div>
           </div>
 
-          <a className="form__secret" href="#">Import with secret phrase</a>
+          <a className="form__secret" href="#" onClick={() => { load('import') }}>Import with secret phrase</a>
 
           <button type="submit" onClick={async () => { 
             const value = document.getElementById("password").value.toString();

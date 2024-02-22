@@ -21,7 +21,12 @@ html {
 .content {
   margin-bottom: auto;
   padding: 0 16px;
-  overflow-y: auto;
+  overflow-y: unset;
+  overflow-x: hidden;
+  -ms-overflow-style: none;
+  /* IE и Edge */
+  scrollbar-width: none;
+  /* Firefox */
 }
 
 .title {
@@ -90,6 +95,13 @@ html {
   text-transform: uppercase;
 }
 
+.btns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 14px;
+  row-gap: 16px;
+}
+
 .btn {
   display: flex;
   align-items: center;
@@ -107,6 +119,25 @@ html {
   font-weight: 600;
   color: var(--black-color);
 }
+
+.btn--secondary {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  width: 100%;
+  padding: 10px;
+  margin: 0 auto;
+  background-color: #171717;
+
+  font-family: var(--secondary-font);
+  text-align: center;
+  font-size: 16px;
+  line-height: 200%;
+  font-weight: 600;
+  color: var(--white-color-color);
+}
+
 
 .btn_disabled {
   display: flex;

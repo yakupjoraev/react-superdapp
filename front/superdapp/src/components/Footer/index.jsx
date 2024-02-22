@@ -32,7 +32,7 @@ function Footer({ showWallet, showActivity, showDashboard, activeItem }) {
             </li>
           )}
               {showDashboard && (
-            <li  className={`footer__item ${activeItem === 'dashboard' ? 'active' : ''}`}>
+            <li  onClick={() => load(13)} className={`footer__item ${activeItem === 'dashboard' ? 'active' : ''}`}>
               <a className="footer__item-link" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none">
                 <g>

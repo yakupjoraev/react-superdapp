@@ -22,11 +22,10 @@ export default async function data_sol() {
                 'https://solana-mainnet.phantom.app/YBPpkkN4g91xDiAnTE9r0RcMkjg0sKUIWvAfoFVJ',
                 'confirmed',
             );
-
             let allBalance = 0;
             const { seed } =  await getAccount(); 
             const dat = await axios.get(`https://api.cryptorank.io/v0/tickers?isTickersForPriceCalc=true&limit=1&coinKeys=solana`)
-            const seedx = await mnemonicToSeed(seed)
+            const seedx = await mnemonicToSeed(seed);
             const masterNode = fromMasterSeed(seedx);
             const derivedKey = masterNode.derive(derivePath);
             const keypairs = Keypair.fromSeed(derivedKey._privateKey);
@@ -40,10 +39,12 @@ export default async function data_sol() {
             const zaglushka = `./img/solana.svg`;
             for (const tokenAddress in toks) {
                 const tokenInfo = toks[tokenAddress];
-                if (tokenInfo.balance !== null) {
+                if (tokenInfo.balance != null) {
                     const toktok = await getToken(tokenAddress);
-                    const dat = toktok.data
+                    const dat = toktok
+                    if (dat == null) continue; 
                     let image = dat.tokenList.image
+                    allBalance += +dat.price_usd
                     if(image == null) {
                         image = zaglushka;
                         if(dat.tokenMetadata.offChainInfo == null) {
@@ -52,28 +53,29 @@ export default async function data_sol() {
                             image = dat.tokenMetadata.offChainInfo.image
                           }
                     }
-                    spl_tokens_balances_data[dat.tokenList.symbol] = {
+                    spl_tokens_balances_data[dat.tokenList.symbol.toLowerCase()] = {
                         balance: tokenInfo.balance,
+                        usd: parseFloat(parseFloat(dat.price_usd) * tokenInfo.balance),
                         image,
                         contract: tokenAddress,
                         chain: 'solana',
+                        name: dat.tokenList.name,
                         decimals: dat.decimals
                     };
-                    spl_tokens_prices_data[dat.tokenList.symbol] = {
-                        usd: 0,
+                    spl_tokens_prices_data[dat.tokenList.symbol.toLowerCase()] = {
+                        usd: parseFloat(dat.price_usd),
                     };
-                    spl_tokens_percents_data[dat.tokenList.symbol] = {
+                    spl_tokens_percents_data[dat.tokenList.symbol.toLowerCase()] = {
                         percent: 0,
                     };
                 }
             }
             const balancefinal_sol = balance_sol / LAMPORTS_PER_SOL
-            const finaldollarbalance_sol = parseFloat(parseFloat(dat.data.data[0].usdLast) * balancefinal_sol).toFixed(2)
+            const finaldollarbalance_sol = parseFloat(parseFloat(dat.data.data[0].usdLast) * balancefinal_sol)
             allBalance += + finaldollarbalance_sol
-            await addToAccount('balances', [{ summ: allBalance, sol: { balance: balancefinal_sol, usd: finaldollarbalance_sol, image: './img/solana.svg', contract: 'solana', chain: 'solana' }, ...spl_tokens_balances_data}]);
-            // await addToAccount('prices', [{sol: { parseFloat(dat.data.data[0].usdLast).toFixed(2) }, ...spl_tokens_prices_data} ] );
-            await addToAccount('prices', [{ sol: { usd: parseFloat(dat.data.data[0].usdLast).toFixed(2) }, ...spl_tokens_percents_data}]);
-            await addToAccount('percents', [{ sol: { percent: parseFloat(dat.data.data[0].change).toFixed(2) }, ...spl_tokens_percents_data}]);
+            await addToAccount('balances', [{ summ: allBalance, sol: { balance: balancefinal_sol, usd: finaldollarbalance_sol, image: './img/solana.svg', contract: 'solana', chain: 'solana', name: 'Solana' }, ...spl_tokens_balances_data}]);
+            await addToAccount('prices', [{ sol: { usd: parseFloat(dat.data.data[0].usdLast) }, ...spl_tokens_prices_data}]);
+            await addToAccount('percents', [{ sol: { percent: parseFloat(dat.data.data[0].change) }, ...spl_tokens_percents_data}]);
             const accUpdated = await getAccount();
             return accUpdated;
         } else {

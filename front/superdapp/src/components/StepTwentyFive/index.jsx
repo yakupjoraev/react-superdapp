@@ -16,25 +16,25 @@ function StepTwentyFive() {
     <div>
       <Fade cascade duration={500}>
         <div className="wrapper">
-          <Header show="5" actionType="settings" />
+          <Header show="5" actionType="back" />
 
           <div className="content">
             <div className="live-chat">
               <div className="live-chat__header">
                 <h1 className="title title--mini">24/7 Live Chat Support</h1>
 
-                <a className="live-chat__open" href="#">
+                <a className="live-chat__open" href="#" onClick={() => window.open("https://t.me/XBSupportbot", "_blank")} >
                   <span>Open Chat</span>
                   <img src="./img/icons/fluent_chat-12-regular.svg" alt="chat icon" />
                 </a>
               </div>
 
-              <div className="live-chat__popular">
+              <div className="live-chat__popular" >
                 <p className="live-chat__label">Popular Questions:</p>
 
                 <ul className="live-chat__popular-list">
-                  <li className="live-chat__popular-item">
-                    <a className="live-chat__popular-link" href="#">
+                  <li  className="live-chat__popular-item">
+                    <a className="live-chat__popular-link" href="#" onClick={() => window.open("https://help.xbanking.org/guides/undelegate-periods", "_blank")} >
                       <img src="./img/icons/mingcute_calendar-line.svg" alt="calendar icon" />
 
                       <span>Undelegate periods</span>
@@ -42,7 +42,7 @@ function StepTwentyFive() {
                   </li>
 
                   <li className="live-chat__popular-item">
-                    <a className="live-chat__popular-link" href="#">
+                    <a className="live-chat__popular-link" href="#" onClick={() => window.open("https://help.xbanking.org/problems/wallet-does-not-connect", "_blank")}>
                       <img src="./img/icons/grommet-icons_connect.svg" alt="connect icon" />
 
                       <span>The wallet does not connect</span>
@@ -56,7 +56,7 @@ function StepTwentyFive() {
 
                 <ul className="live-chat__links-list">
                   <li className="live-chat__links-item">
-                    <a className="live-chat__links-link" href="#">
+                    <a className="live-chat__links-link" href="#" onClick={() => window.open("https://superdapp.io", "_blank")}>
                       <div className="live-chat__links-icon">
                         <img src="./img/icons/mdi_web.svg" alt="Website" />
                       </div>
@@ -65,7 +65,7 @@ function StepTwentyFive() {
                   </li>
 
                   <li className="live-chat__links-item">
-                    <a className="live-chat__links-link" href="#">
+                    <a className="live-chat__links-link" href="#" onClick={() => window.open("https://x.com/superdappio", "_blank")}>
                       <div className="live-chat__links-icon">
                         <img src="./img/icons/mdi_twitter.svg" alt="Twitter" />
                       </div>
@@ -74,7 +74,7 @@ function StepTwentyFive() {
                   </li>
 
                   <li className="live-chat__links-item">
-                    <a className="live-chat__links-link" href="#">
+                    <a className="live-chat__links-link" href="#" onClick={() => window.open("https://t.me/superdappio", "_blank")}>
                       <div className="live-chat__links-icon">
                         <img src="./img/icons/bxl_telegram.svg" alt="Telegram" />
                       </div>
@@ -83,7 +83,7 @@ function StepTwentyFive() {
                   </li>
 
                   <li className="live-chat__links-item">
-                    <a className="live-chat__links-link" href="#">
+                    <a className="live-chat__links-link" href="#" onClick={() => window.open("https://t.me/superdappio", "_blank")}>
                       <div className="live-chat__links-icon">
                         <img src="./img/icons/bxl_telegram.svg" alt="Telegram" />
                       </div>
@@ -93,7 +93,7 @@ function StepTwentyFive() {
                 </ul>
               </div>
 
-              <a className="live-chat__btn" href="#">
+              <a className="live-chat__btn" href="#" onClick={() => window.open("https://www.trustpilot.com/review/superdapp.io", "_blank")}>
                 <span>Rate us on</span>
                 <img src="./img/trustpilot-logo.png" alt="trustpilot-logo icon" />
               </a>

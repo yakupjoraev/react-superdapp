@@ -7,18 +7,20 @@ import { useEffect, useState } from "react";
 import { Keypair, Connection, clusterApiUrl } from "@solana/web3.js";
 import { getAccount, addToAccount } from "../../systems/storage/store";
 import defaults from "../../crypto/defaults";
+import { ToastContainer, toast } from 'react-toastify';
 import { mnemonicToSeed, generateMnemonic } from "bip39";
 import { fromMasterSeed } from "hdkey";
 function StepThree() {
   
   const [data, updateData] = useState([]);
-
+  const [phrase, setPhrase] = useState('')
   useEffect(() => {
     async function createWallet() {
       const result = await getAccount();
       const { seed } = result;
       if(seed != null) return load(4);
       const mnemonicas = await generateMnemonic();
+      setPhrase(mnemonicas);
       const derivePath = "m/44'/501'/0'/0'"
       const seedx = await mnemonicToSeed(mnemonicas)
       const masterNode = fromMasterSeed(seedx);
@@ -32,6 +34,7 @@ function StepThree() {
       await addToAccount('prices', defaults.prices);
       await addToAccount('percents', defaults.percents);
       const splittedSeed = await mnemonicas.split(' ');
+      
       updateData(await splittedSeed);
     }
     createWallet();
@@ -39,10 +42,23 @@ function StepThree() {
   if (screen.current != 3) return null;
   return (
     <div className="wrapper">
+            <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="dark"
+/>
       <div className="content">
         <div className="create-password">
           <div className="create-password__steps">
             <div className="create-password__step-line active"></div>
+            
 
             <div className="create-password__step active">
               <div className="create-password__step-num">
@@ -98,7 +114,16 @@ function StepThree() {
             </ul>
 
             <button type="button" className="form__copy">
-              <p className="form__copy-text" >Copy full phrase</p>
+              <p className="form__copy-text" onClick={() => {navigator.clipboard.writeText(phrase); toast.info('Address copied to clipboard', {
+                              position: "top-right",
+                              autoClose: 5000,
+                              hideProgressBar: false,
+                              closeOnClick: true,
+                              pauseOnHover: true,
+                              draggable: true,
+                              progress: undefined,
+                              theme: "dark",
+                            });}} >Copy full phrase</p>
               <img className="form__copy-pic" src="./img/icons/copy.svg" alt="copy icon" />
             </button>
             {/* УБРАТЬ вставки кошелька и сидки СЛИ НУЖНО ЗАРЕГАТЬ НОВЫЙ КОШЕЛЕК А НЕ ДЛЯ ТЕСТИРОВАНИЯ БРАТЬ */}

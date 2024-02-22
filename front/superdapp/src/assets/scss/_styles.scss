@@ -89,6 +89,7 @@
 }
 
 .dashboard__label {
+  row-gap: 24px;
   margin-bottom: 12px;
   font-size: 14px;
   font-weight: 700;
@@ -97,8 +98,8 @@
 
 .dashboard__columns {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 8px;
   &:not(:last-child) {
     margin-bottom: 8px;
   }
@@ -134,6 +135,7 @@
 }
 
 .dashboard__column--unstake {
+  cursor: pointer;
   border-radius: 0px 16px 16px 0px;
   background-color: var(--primary-color);
   color: var(--black-color);
@@ -214,8 +216,9 @@
 }
 
 
-.wallet__banner1 {
+.wallet__banner11 {
   display: flex;
+  cursor: pointer;
   align-items: center;
   // min-width: 350px;
   height: 90px;
@@ -223,7 +226,7 @@
   border: #161616;
   border-radius: 10px;
   background-color: var(--primary-color);
-  background-image: url('./img/banner1.png');
+  background-image: url('https://xbanking.org/chat/img/banner1.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right;
@@ -231,13 +234,14 @@
 
 .wallet__banner2 {
   display: flex;
+  cursor: pointer;
   align-items: center;
   min-width: 350px;
   height: 90px;
   padding: 10px 20px;
   border-radius: 10px;
   background-color: var(--primary-color);
-  background-image: url('./img/banner2.png');
+  background-image: url('https://xbanking.org/chat/img/banner2.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: right;
@@ -245,6 +249,7 @@
 
 .wallet__banner3 {
   display: flex;
+  cursor: pointer;
   align-items: center;
   min-width: 350px;
   height: 90px;
@@ -368,6 +373,7 @@
 }
 
 .wallet__token {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -395,7 +401,6 @@
   min-width: 36px;
   height: 36px;
   border-radius: 100%;
-  background-color: var(--white-color);
 }
 
 .wallet__token-info {
@@ -486,6 +491,7 @@
 }
 
 .active__block {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -526,6 +532,8 @@
 }
 
 .active__text {
+  display: flex;
+  align-items: flex-start;
   margin: 0;
 }
 
@@ -541,9 +549,15 @@
   text-align: right;
 }
 
+.wallet::-webkit-scrollbar {
+  display: none;
+}
+
 .wallet {
-  overflow-y: auto;
+  overflow-y:unset;
   overflow-x: hidden;
+  -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;  /* Firefox */
   margin: 0 -20px;
   padding: 16px;
 }

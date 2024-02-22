@@ -16,6 +16,7 @@ function StepTen() {
 
   function setTx(tr) {
     localStorage.currentTx = tr;
+    localStorage.frs = 10;
     const transaction = JSON.parse(tr);
     if(transaction.type == 'recieve') {
       load(11)
@@ -41,13 +42,42 @@ function StepTen() {
 
           const transactionsArrays = await Promise.all(asyncTasks);
           const combinedArray = transactionsArrays.flat();
-          setTransactions(combinedArray);
+          const modifiedTransactions = combinedArray.reduce((acc, transaction, index, array) => {
+            // Если это первая транзакция или дата текущей транзакции отличается от даты предыдущей транзакции,
+            // то добавляем транзакцию без изменений
+            if (index === 0 || transaction.date !== array[index - 1].date) {
+              acc.push(transaction);
+            } else {
+              // Если дата текущей транзакции совпадает с датой предыдущей транзакции,
+              // то добавляем транзакцию с датой, замененной на 0
+              acc.push({...transaction, date: 0});
+            }
+            return acc;
+          }, []);
+          
+          // Затем сохраняем модифицированный массив в состояние
+          setTransactions(modifiedTransactions);
         }
 
         const promises = [history_sol()];
         const resultsArray = await Promise.all(promises);
         const latestData = resultsArray[resultsArray.length - 1];
-        setTransactions(latestData);
+        if(latestData == undefined) {
+          setLoading(false); return;
+        }
+        const modifiedTransactions_gt = latestData.reduce((acc, transaction, index, array) => {
+          // Если это первая транзакция или дата текущей транзакции отличается от даты предыдущей транзакции,
+          // то добавляем транзакцию без изменений
+          if (index === 0 || transaction.date !== array[index - 1].date) {
+            acc.push(transaction);
+          } else {
+            // Если дата текущей транзакции совпадает с датой предыдущей транзакции,
+            // то добавляем транзакцию с датой, замененной на 0
+            acc.push({...transaction, date: 0});
+          }
+          return acc;
+        }, []);
+        setTransactions(modifiedTransactions_gt);
         setLoading(false);
       } catch (error) {
         console.error(error);
@@ -71,11 +101,10 @@ function StepTen() {
 
       <div id="activities" className="activities">
       {allTransactions.map((transaction, index) => (
-<div key={index} onClick={async () => { await setTx(JSON.stringify(transaction)); } } className="active">
+<div key={index} onClick={async () => { setTx(JSON.stringify(transaction)); } } className="active clickable">
 <p className="active__label">
- {transaction.date}
-</p>
-
+      {transaction.date === 0 ? "" : transaction.date}
+    </p>
 <div className="active__block">
 <div className="active__info">
   <div>
